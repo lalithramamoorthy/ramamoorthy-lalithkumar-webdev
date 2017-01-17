@@ -1,5 +1,5 @@
 {
-  "name": "ramamoorthy-lalithkumar",
+  "name": "web-dev",
   "version": "1.0.0",
   "description": "Web Dev at Northeastern University",
   "main": "server.js",
@@ -14,16 +14,5 @@
     "start": "node server.js"
   },
   "author": "Jose G. Annunziato",
-  "license": "ISC",
-  "directories": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lalithramamoorthy/ramamoorthy-lalithkumar-webdev.git"
-  },
-  "bugs": {
-    "url": "https://github.com/lalithramamoorthy/ramamoorthy-lalithkumar-webdev/issues"
-  },
-  "homepage": "https://github.com/lalithramamoorthy/ramamoorthy-lalithkumar-webdev#readme"
+  "license": "ISC"
 }
