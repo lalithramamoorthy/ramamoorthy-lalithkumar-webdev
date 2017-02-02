@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" rel="stylesheet"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Website List</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-text pull-left">
+                <a href="../User/profile.html">
+                    <span class=" glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="page navbar-header">
+                <a class="navbar-brand" href="#">Websites</a>
+            </div>
+            <div class="navbar-text" >
+                <a href="../Website/website-new.html" class="navbar-link">
+                    <span class=" glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="navbar-text pull-left visible-xs">
+                <a href="../Website/website-list.html">
+                    <span class=" glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="page navbar-header">
+                <a class="navbar-brand" href="#">Edit Page</a>
+            </div>
+            <div class="navbar-text" >
+                <a href="../Website/website-list.html" class="navbar-link ">
+                    <span class=" glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="row container-fluid">
+    <div class="wbdv-left-pane col-sm-4 hidden-xs ">
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-body">
+
+                <a href="../Page/page-list.html">
+                    Address Book App
+                </a>
+
+                <a href="website-edit.html" class="pull-right">
+                    <span class="glyphicon-blue glyphicon glyphicon-cog"></span>
+                </a>
+            </div>
+            <div class="panel-body">
+
+                <a href="../Page/page-list.html">
+                    Blogger
+                </a>
+
+                <a href="website-edit.html" class="pull-right">
+                    <span class="glyphicon-blue glyphicon glyphicon-cog"></span>
+                </a>
+            </div>
+            <div class="panel-body">
+
+                <a href="../Page/page-list.html">
+                    Blogging App
+                </a>
+
+                <a href="website-edit.html" class="pull-right">
+                    <span class="glyphicon-blue glyphicon glyphicon-cog"></span>
+                </a>
+            </div>
+            <div class="panel-body">
+
+                <a href="../Page/page-list.html">
+                    Script Testing App
+                </a>
+
+                <a href="website-edit.html" class="pull-right">
+                    <span class="glyphicon-blue glyphicon glyphicon-cog"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+<div class="col-xs-12 col-sm-8 wbdv-right-pane">
+
+    <label for="name">Website Name</label>
+    <input class="form-control" id="name" type="text" placeholder="Name" value="Blogger">
+
+    <label for="description">Website Description</label>
+    <textarea class="form-control" id="description" rows="3" placeholder="Description" >A blog originally came from the word “weblog” or a “web log”. You can think of it as an online journal or diary, although blogs are used for much more now, like online journalism. A blogger is someone who blogs, or writes content for a blog. Blogging is the act of writing a post for a blog.</textarea>
+
+    <a class="btn btn-danger btn-block" href="../Website/website-list.html">
+        Delete
+    </a>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text" >
+            <a href="../User/profile.html" class="navbar-link ">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>
