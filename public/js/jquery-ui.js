@@ -309,7 +309,7 @@
 
 
     /*!
-     * jQuery UI Widget 1.11.4
+     * jQuery UI widget 1.11.4
      * http://jqueryui.com
      *
      * Copyright jQuery Foundation and other contributors
