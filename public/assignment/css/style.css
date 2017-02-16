@@ -185,3 +185,7 @@ a:hover{
 .navbar-link{
     color:white;
 }
+
+.button-padding {
+    padding-top: 10px;
+}

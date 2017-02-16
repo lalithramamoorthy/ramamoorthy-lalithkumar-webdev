@@ -1,0 +1,58 @@
+
+<nav class="page navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+
+        <div class="page navbar-header">
+            <a class="navbar-brand" ng-href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                <span class="glyphicon-black glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="navbar-brand" href="">
+                Choose Widget
+            </a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row container-fluid">
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-body" ng-click = "model.gotoWidget('HEADER')">
+
+                <a href="">
+                    Header
+                </a>
+
+            </div>
+            <div class="panel-body"  ng-click = "model.gotoWidget('IMAGE')">
+
+                <a href="">
+                    Image
+                </a>
+            </div>
+            <div class="panel-body" ng-click = "model.gotoWidget('YOUTUBE')">
+
+                <a  href="">
+                    Youtube
+                </a>
+            </div>
+            <div class="panel-body" ng-click = "model.gotoWidget('HTML')">
+
+                <a  href="">
+                    HTML
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <nav class="page navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-text" >
+                <a ng-href="#/profile/{{model.userId}}" class="navbar-link ">
+                    <span class="glyphicon-blue glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
