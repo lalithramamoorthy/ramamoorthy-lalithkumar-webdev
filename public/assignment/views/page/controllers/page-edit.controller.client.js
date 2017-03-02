@@ -12,8 +12,15 @@
         vm.update = update;
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
-            vm.page = PageService.findPageById(vm.pageId);
+            var promise = PageService.findAllPagesForWebsite(vm.websiteId);
+            promise.success(function(pages){
+                vm.pages = pages;
+            });
+
+            var promise1 = PageService.findPageById(vm.pageId);
+            promise1.success(function(page){
+                vm.page = page;
+            });
         }
         init();
 
@@ -23,13 +30,16 @@
         };
 
         function update(pageId, newPage) {
-            var page = PageService.updatePage(pageId, newPage);
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-            if(page == null) {
-                vm.error = "unable to update page";
-            } else {
-                vm.message = "page successfully updated"
-            }
+
+            var promise = PageService.updatePage(pageId, newPage);
+            promise.success(function (page) {
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                if(page == null) {
+                    vm.error = "unable to update page";
+                } else {
+                    vm.message = "page successfully updated"
+                }
+            });
         };
     }
 })();

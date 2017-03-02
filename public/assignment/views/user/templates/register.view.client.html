@@ -2,6 +2,10 @@
 <div class="container-fluid">
     <h1>Register</h1>
 
+    <div class="alert alert-success" ng-show="model.message">
+        {{model.message}}
+    </div>
+
     <input ng-model = "user.username"
             id="username"
            class="form-control"
@@ -19,5 +23,5 @@
            placeholder="verify password"/>
 
     <a ng-click="model.create(user)" class="btn btn-primary btn-block">Register</a>
-    <a href="login.view.client.html" class="btn btn-danger btn-block">Cancel</a>
+    <a href="#/login" class="btn btn-danger btn-block">Cancel</a>
 </div>

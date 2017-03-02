@@ -25,8 +25,19 @@
     <div  ng-include="model.getEditorTemplateUrl(model.widget.widgetType)">
     </div>
     <div class = "button-padding">
-        <a class=" btn btn-primary btn-block"
-           ng-click="model.updateWidget(model.widget)">Update</a>
+        <form ng-if="model.widget.widgetType == 'IMAGE'" action="/api/upload" method="post" enctype="multipart/form-data" id="upload">
+            <input name="myFile" type="file" class="form-control"/>
+            <input name="width" value="{{model.widget.width}}" style="display: none"/>
+            <input name="userId" value="{{model.userId}}" style="display: none"/>
+            <input name="websiteId" value="{{model.websiteId}}" style="display: none"/>
+            <input name="widgetId" value="{{model.widget._id}}" style="display: none"/>
+            <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+        </form>
+
+    </div>
+    <div class = "button-padding">
+        <a class="button-padding btn btn-primary btn-block"
+       ng-click="model.updateWidget(model.widget)">Update</a>
     </div>
     <div class = "button-padding">
         <a class=" btn btn-danger btn-block"

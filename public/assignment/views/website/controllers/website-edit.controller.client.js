@@ -11,24 +11,40 @@
         vm.update = update;
 
         function init() {
-            vm.websites = WebsiteService.findAllWebsitesForUser(vm.userId);
-            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+
+            var promise = WebsiteService.findAllWebsitesForUser(vm.userId);
+            promise.success(function(websites){
+                vm.websites = websites;
+            });
+
+            var promise1 = WebsiteService.findWebsiteById(vm.websiteId);
+            promise1.success(function(website){
+                vm.website = website;
+            });
         }
         init();
 
         function deleteWebsite () {
-            WebsiteService.deleteWebsite(vm.websiteId);
-            $location.url("/user/"+vm.userId+"/website");
+            var promise = WebsiteService.deleteWebsite(vm.websiteId);
+
+            promise.success(function () {
+                $location.url("/user/"+vm.userId+"/website");
+            })
         };
 
         function update(websiteId, newWebsite) {
-            var web = WebsiteService.updateWebsite(websiteId, newWebsite);
-            $location.url("/user/"+vm.userId+"/website");
-            if(web == null) {
-                vm.error = "unable to update website";
-            } else {
-                vm.message = "website successfully updated"
-            }
+
+            var promise =  WebsiteService.updateWebsite(websiteId, newWebsite);
+
+            promise.success(function (web) {
+                if(web != null) {
+                    vm.message = "website successfully updated"
+                    $location.url("/user/"+vm.userId+"/website");
+                } else {
+                    vm.error = "unable to update website";
+                }
+            });
+
         };
     }
 })();

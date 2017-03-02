@@ -12,17 +12,22 @@
         init();
 
         function create(user) {
-            var newUser = {_id:"", username:"", password:"", email:""};
-            newUser.username = user.username;
-            newUser.password = user.password;
-            newUser = UserService.createUser(newUser);
-
-            if(newUser !== null) {
-                $location.url('/profile/' + newUser._id);
-            } else {
-                vm.message = "user successfully updated"
-            }
-        };
+            UserService
+                .findUserByUsername(user.username)
+                .success(function (user) {
+                    vm.error = "sorry that username is taken"
+                })
+                .error(function(){
+                    UserService
+                        .createUser(user)
+                        .success(function(user){
+                            $location.url('/profile/' + user._id);
+                        })
+                        .error(function () {
+                            vm.error = 'sorry could not register';
+                        });
+                });
+        }
 
     }
 })();

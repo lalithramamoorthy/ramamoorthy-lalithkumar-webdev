@@ -24,8 +24,11 @@
         }
 
         function createWidget(widget) {
-            vm.widget = WidgetService.createWidget(vm.pageId, widget);
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+            WidgetService
+                .createWidget(vm.pageId, widget)
+                .success(function(user){
+                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                });
         }
 
         function gotoWidget(widgetType) {

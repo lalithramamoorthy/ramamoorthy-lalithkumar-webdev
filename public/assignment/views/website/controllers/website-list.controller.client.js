@@ -9,7 +9,10 @@
 
 
         function init() {
-            vm.websites = WebsiteService.findAllWebsitesForUser(vm.userId);
+            var promise = WebsiteService.findAllWebsitesForUser(vm.userId);
+            promise.success(function(websites){
+                vm.websites = websites;
+            });
         }
         init();
     }

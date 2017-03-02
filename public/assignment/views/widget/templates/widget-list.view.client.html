@@ -20,15 +20,14 @@
     </div>
 </nav>
 
-<div class="container-fluid">
-
+<div wbdv-sortable="" class="container-fluid">
     <div ng-repeat="widget in model.widgets">
         <div class="jga-toolbar">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon-blue glyphicon glyphicon-cog"></span>
             </a>
 
-            <span class="glyphicon-blue glyphicon glyphicon-align-justify"></span>
+            <span class="widget-dragger glyphicon-blue glyphicon glyphicon-align-justify"></span>
         </div>
 
 
@@ -47,7 +46,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <nav class="page navbar navbar-default navbar-fixed-bottom">

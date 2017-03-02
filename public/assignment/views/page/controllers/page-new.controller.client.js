@@ -10,13 +10,19 @@
         vm.createPage = createPage;
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            var promise = PageService.findAllPagesForWebsite(vm.websiteId);
+            promise.success(function(pages){
+                vm.pages = pages;
+            });
         }
         init();
 
         function createPage (page) {
-           PageService.createPage(vm.websiteId, page);
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+           PageService
+               .createPage(vm.websiteId, page)
+               .success(function(page) {
+                   $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+               });
         };
     }
 })();
