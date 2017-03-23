@@ -4,3 +4,12 @@
 
 <label for="text">Text</label>
 <textarea ng-model="model.widget.text" class="form-control" id="text" rows="3" placeholder="Text" ></textarea>
+
+<div ng-model="model.widget.text"
+     text-angular
+     ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]">
+</div>
+
+<input ng-model="model.widget.type" type = "hidden" class="form-control" placeholder="Text" ng-value="HTML"/>

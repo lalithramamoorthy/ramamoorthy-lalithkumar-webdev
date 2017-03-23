@@ -11,32 +11,34 @@
 
 
         function init() {
-            var promise = UserService.findUserById(userId);
-            promise.success(function(user){
+           UserService.findUserById(userId)
+                .then(function (user){
                 vm.user = user;
             });
         }
         init();
 
         function update(newUser) {
-            var promise =  UserService
-                .updateUser(userId, newUser);
-
-                promise.success(function (user) {
-                    if(user != null) {
-                        vm.message = "User Successfully Updated!"
-                    } else {
-                        vm.error = "Unable to update user";
+            UserService
+                .updateUser(userId, newUser)
+                .then(function (user) {
+                    if(user) {
+                        vm.message = "Profile successfully updated";
+                    }else {
+                        vm.error = "Unable to update Profile";
                     }
                 });
         };
 
         function deleteU() {
-            var promise = UserService.deleteUser(userId);
-            promise.success(function () {
-                $location.url("/login");
-            })
+            UserService.deleteUser(userId)
+                .then(function(user) {
+                    if(user) {
+                        $location.url("/login");
+                    } else {
+                        vm.error = "Unable to delete User";
+                    }
+                });
         };
-
     }
 })();

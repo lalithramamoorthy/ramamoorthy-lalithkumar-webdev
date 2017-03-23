@@ -9,13 +9,13 @@
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
         vm.widgetId = $routeParams.wgid;
-        vm.widgetType = $routeParams.wgt;
+        vm.type = $routeParams.wgt;
         vm.getEditorTemplateUrl = getEditorTemplateUrl;
         vm.createWidget = createWidget;
         vm.gotoWidget = gotoWidget;
 
         function init() {
-            vm.widget = {"widgetType" : vm.widgetType};
+            vm.widget = {"type" : vm.type};
         }
         init();
 
@@ -26,7 +26,7 @@
         function createWidget(widget) {
             WidgetService
                 .createWidget(vm.pageId, widget)
-                .success(function(user){
+                .then(function(user){
                     $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
                 });
         }

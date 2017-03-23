@@ -10,8 +10,8 @@
         vm.createPage = createPage;
 
         function init() {
-            var promise = PageService.findAllPagesForWebsite(vm.websiteId);
-            promise.success(function(pages){
+            PageService.findAllPagesForWebsite(vm.websiteId)
+            .then(function(pages){
                 vm.pages = pages;
             });
         }
@@ -20,7 +20,7 @@
         function createPage (page) {
            PageService
                .createPage(vm.websiteId, page)
-               .success(function(page) {
+               .then(function(page) {
                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
                });
         };

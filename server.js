@@ -23,8 +23,7 @@ app.set('view engine', 'ejs');
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
-require ("./test/app.js")(app);
-
+// require ("./test/app.js")(app);
 var assignment = require("./assignment/app.js");
 assignment(app);
 

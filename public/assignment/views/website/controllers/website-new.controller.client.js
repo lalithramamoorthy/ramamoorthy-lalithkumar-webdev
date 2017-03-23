@@ -9,8 +9,8 @@
         vm.createWebsite = createWebsite;
 
         function init() {
-            var promise = WebsiteService.findAllWebsitesForUser(vm.userId);
-            promise.success(function(websites){
+            WebsiteService.findAllWebsitesForUser(vm.userId)
+                .then(function(websites){
                 vm.websites = websites;
             });
         }
@@ -19,7 +19,7 @@
         function createWebsite (website) {
             WebsiteService
                 .createWebsite(vm.userId, website)
-                .success(function(user){
+                .then(function(user){
                     $location.url("/user/"+vm.userId+"/website");
                 });
         };

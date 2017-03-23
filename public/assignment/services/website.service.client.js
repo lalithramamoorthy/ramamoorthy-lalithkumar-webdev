@@ -14,23 +14,39 @@
         return api;
 
         function findWebsiteById(wid) {
-            return $http.get("/api/website/"+wid);
+            return $http.get("/api/website/"+wid)
+                .then(function (res) {
+                    console.log(res.data);
+                return res.data;
+            });
         }
 
         function deleteWebsite(websiteId) {
-            return $http.delete("/api/website/"+websiteId);
+            return $http.delete("/api/website/"+websiteId)
+                .then(function (res) {
+                    return res.data;
+                });
         }
 
         function createWebsite(userId, website) {
-           return $http.post("/api/user/"+userId+"/website", website);
+           return $http.post("/api/user/"+userId+"/website", website)
+               .then(function (res) {
+                   return res.data;
+               });
         }
 
         function findAllWebsitesForUser(userId) {
-            return $http.get("/api/user/"+userId+"/website");
+            return $http.get("/api/user/"+userId+"/website")
+                .then(function (res) {
+                    return res.data;
+                });
         }
 
         function updateWebsite(websiteId, newWebsite) {
-            return $http.put("/api/website/"+websiteId, newWebsite);
+            return $http.put("/api/website/"+websiteId, newWebsite)
+                .then(function (res) {
+                    return res.data;
+                });
         }
     }
 })();

@@ -11,21 +11,32 @@
         }
         init();
 
+        // function create(user) {
+        //     UserService
+        //         .findUserByUsername(user.username)
+        //         .success(function (user) {
+        //             vm.error = "sorry that username is taken"
+        //         })
+        //         .error(function(){
+        //             UserService
+        //                 .createUser(user)
+        //                 .success(function(user){
+        //                     $location.url('/profile/' + user._id);
+        //                 })
+        //                 .error(function () {
+        //                     vm.error = 'sorry could not register';
+        //                 });
+        //         });
+        // }
+
         function create(user) {
-            UserService
-                .findUserByUsername(user.username)
-                .success(function (user) {
-                    vm.error = "sorry that username is taken"
-                })
-                .error(function(){
-                    UserService
-                        .createUser(user)
-                        .success(function(user){
-                            $location.url('/profile/' + user._id);
-                        })
-                        .error(function () {
-                            vm.error = 'sorry could not register';
-                        });
+            UserService.createUser(user)
+                .then(function (usr) {
+                    if(usr) {
+                        $location.url("/user/" + usr._id);
+                    } else {
+                        vm.error = "Username already exist";
+                    }
                 });
         }
 

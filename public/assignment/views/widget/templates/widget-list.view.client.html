@@ -29,22 +29,22 @@
 
             <span class="handle glyphicon-blue glyphicon glyphicon-align-justify"></span>
         </div>
+        <ng-include src="model.getWidgetTemplateUrl(widget.type)"></ng-include>
 
-
-        <div ng-switch="widget.widgetType">
-            <div ng-switch-when="HEADER">
-                <ng-include src="'views/widget/templates/widget-HEADER.view.client.html'"></ng-include>
-            </div>
-            <div ng-switch-when="IMAGE">
-                <ng-include src="'views/widget/templates/widget-IMAGE.view.client.html'"></ng-include>
-            </div>
-            <div ng-switch-when="HTML">
-                <ng-include src="'views/widget/templates/widget-HTML.view.client.html'"></ng-include>
-            </div>
-            <div ng-switch-when="YOUTUBE">
-                <ng-include src="'views/widget/templates/widget-YOUTUBE.view.client.html'"></ng-include>
-            </div>
-        </div>
+        <!--<div ng-switch="widget.widgetType">-->
+            <!--<div ng-switch-when="HEADER">-->
+                <!--<ng-include src="'views/widget/templates/widget-HEADER.view.client.html'"></ng-include>-->
+            <!--</div>-->
+            <!--<div ng-switch-when="IMAGE">-->
+                <!--<ng-include src="'views/widget/templates/widget-IMAGE.view.client.html'"></ng-include>-->
+            <!--</div>-->
+            <!--<div ng-switch-when="HTML">-->
+                <!--<ng-include src="'views/widget/templates/widget-HTML.view.client.html'"></ng-include>-->
+            <!--</div>-->
+            <!--<div ng-switch-when="YOUTUBE">-->
+                <!--<ng-include src="'views/widget/templates/widget-YOUTUBE.view.client.html'"></ng-include>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </div>
 

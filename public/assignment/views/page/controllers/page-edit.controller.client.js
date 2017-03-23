@@ -12,27 +12,29 @@
         vm.update = update;
 
         function init() {
-            var promise = PageService.findAllPagesForWebsite(vm.websiteId);
-            promise.success(function(pages){
+            PageService.findAllPagesForWebsite(vm.websiteId)
+                .then(function(pages){
                 vm.pages = pages;
             });
 
-            var promise1 = PageService.findPageById(vm.pageId);
-            promise1.success(function(page){
+            PageService.findPageById(vm.pageId)
+                .then(function(page){
                 vm.page = page;
             });
         }
         init();
 
         function deletePage () {
-            PageService.deletePage(vm.pageId);
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+            PageService.deletePage(vm.pageId).
+                then(function(page) {
+                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            });
         };
 
         function update(pageId, newPage) {
 
-            var promise = PageService.updatePage(pageId, newPage);
-            promise.success(function (page) {
+            PageService.updatePage(pageId, newPage)
+            .then(function (page) {
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
                 if(page == null) {
                     vm.error = "unable to update page";

@@ -12,31 +12,31 @@
 
         function init() {
 
-            var promise = WebsiteService.findAllWebsitesForUser(vm.userId);
-            promise.success(function(websites){
+            WebsiteService.findAllWebsitesForUser(vm.userId)
+                .then(function(websites){
                 vm.websites = websites;
             });
 
-            var promise1 = WebsiteService.findWebsiteById(vm.websiteId);
-            promise1.success(function(website){
+            WebsiteService.findWebsiteById(vm.websiteId)
+                .then(function(website){
                 vm.website = website;
             });
         }
         init();
 
         function deleteWebsite () {
-            var promise = WebsiteService.deleteWebsite(vm.websiteId);
+            WebsiteService.deleteWebsite(vm.websiteId)
 
-            promise.success(function () {
+                .then(function () {
                 $location.url("/user/"+vm.userId+"/website");
             })
         };
 
         function update(websiteId, newWebsite) {
 
-            var promise =  WebsiteService.updateWebsite(websiteId, newWebsite);
+            WebsiteService.updateWebsite(websiteId, newWebsite)
 
-            promise.success(function (web) {
+                .then(function (web) {
                 if(web != null) {
                     vm.message = "website successfully updated"
                     $location.url("/user/"+vm.userId+"/website");

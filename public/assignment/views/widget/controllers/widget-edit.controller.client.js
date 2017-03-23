@@ -14,8 +14,8 @@
         vm.updateWidget = updateWidget;
 
         function init() {
-            var promise = WidgetService.findWidgetById(vm.widgetId);
-            promise.success(function(widget){
+            WidgetService.findWidgetById(vm.widgetId)
+                .then(function(widget){
                 vm.widget = widget;
             });
         }
@@ -27,17 +27,17 @@
 
         function updateWidget(widget) {
 
-            var promise =  WidgetService.updateWidget(vm.widgetId, widget);
+            WidgetService.updateWidget(vm.widgetId, widget)
 
-            promise.success(function (web) {
+                .then(function (web) {
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             });
 
         }
 
         function deleteWidget() {
-            var promise = WidgetService.deleteWidget(vm.widgetId);
-            promise.success(function (web) {
+            WidgetService.deleteWidget(vm.widgetId)
+                .then(function (web) {
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             });
         }

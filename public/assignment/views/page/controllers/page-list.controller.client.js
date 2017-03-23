@@ -9,8 +9,8 @@
         vm.websiteId = $routeParams.wid;
 
         function init() {
-            var promise = PageService.findAllPagesForWebsite(vm.websiteId);
-            promise.success(function(pages){
+            PageService.findAllPagesForWebsite(vm.websiteId)
+            .then(function(pages){
                 vm.pages = pages;
             });
         }
