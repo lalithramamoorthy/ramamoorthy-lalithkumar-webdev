@@ -45,7 +45,7 @@
                         <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
                              alt="" ng-show="!model.user.imgUrl">
                         <img  class=" profile-small-image-size img-rounded"
-                              ng-show="review.user.imgUrl" ng-src="{{review.user.imgUrl}}">
+                              ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
                         <div class="review-block-name"><a href="" ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
                         </div>
                         <div class="review-block-date">{{review.dateCreated | date : 'mediumDate'}}<br/></div>
