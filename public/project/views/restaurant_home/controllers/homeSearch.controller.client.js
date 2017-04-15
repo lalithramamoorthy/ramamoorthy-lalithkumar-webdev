@@ -9,7 +9,7 @@
         vm.getRestaurantsByNameAndCity = getRestaurantsByNameAndCity;
 
         function init() {
-            console.log("sappu home")
+            console.log("sappu home");
             vm.getRestaurantsByCity("boston");
         }
 

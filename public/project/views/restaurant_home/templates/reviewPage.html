@@ -65,10 +65,10 @@
                                       placeholder="Enter your review here..." rows="5"></textarea>
                             <div class="text-right">
                                 <div class="text-right custom-margin">
-                                    <a ng-show="currentUser" class="btn btn-success btn-lg" href="" ng-click="model.createReview(review)">Success</a>
+                                    <a ng-show="model.user" class="btn btn-success btn-lg" href="" ng-click="model.createReview(review)">Success</a>
                                 </div>
                                 <div class="text-right custom-margin">
-                                    <a ng-show="!currentUser" class="btn btn-warning btn-lg"  href="">Login Required</a>
+                                    <a ng-show="!model.user" class="btn btn-warning btn-lg"  href="">Login Required</a>
                                 </div>
                             </div>
                         </div>

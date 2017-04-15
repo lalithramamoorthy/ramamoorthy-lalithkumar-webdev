@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .factory('UserService', userService);
 
-    function userService($http) {
+    function userService($http, $rootScope) {
 
         var api = {
             "login": login,
@@ -18,7 +18,8 @@
             "followUser": followUser,
             "unFollowUser": unFollowUser,
             "isFollowingAlready": isFollowingAlready,
-            "getUser": getUser
+            "getLoggedInUser": getLoggedInUser,
+            "setCurrentUser": setCurrentUser
         };
         return api;
 
@@ -93,8 +94,17 @@
                 });
         }
 
-        function getUser() {
+        // function getUser() {
+        //     return $http.get("/api/project/loggedin");
+        // }
+
+        function getLoggedInUser() {
+            console.log("client getLoggedIn");
             return $http.get("/api/project/loggedin");
+        }
+
+        function setCurrentUser(user) {
+            $rootScope.currentUser = user;
         }
     }
 })();

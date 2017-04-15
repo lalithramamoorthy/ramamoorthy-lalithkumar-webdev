@@ -4,7 +4,7 @@
         .factory('RestaurantService', restaurantService);
 
     function restaurantService($http) {
-       var searchURL =  "http://opentable.herokuapp.com/api/restaurants?city=&page=&name=&zip=&per_page=50";
+       var searchURL =  "https://opentable.herokuapp.com/api/restaurants?city=&page=&name=&zip=&per_page=50";
         var api = {
             getRestaurantsByCity : getRestaurantsByCity,
             getRestaurantsByNameAndCity : getRestaurantsByNameAndCity
@@ -12,6 +12,7 @@
         return api;
 
         function getRestaurantsByCity(city) {
+            console.log("restaurant service");
             var url = searchURL
                 .replace("city=", "city="+city);
             return $http.get(url);

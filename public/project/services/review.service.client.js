@@ -4,7 +4,7 @@
         .factory('ReviewService', reviewService);
 
     function reviewService($http) {
-        var searchURL =  "http://opentable.herokuapp.com/api/restaurants/:id";
+        var searchURL =  "https://opentable.herokuapp.com/api/restaurants/:id";
         var api = {
             findRestaurantById : findRestaurantById,
             findAllReviewsforRestaurant : findAllReviewsforRestaurant,

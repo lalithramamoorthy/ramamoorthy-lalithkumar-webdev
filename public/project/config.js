@@ -3,42 +3,51 @@
             .module("WebAppMaker")
             .config(configuration);
 
-    var checkLoggedin = function ($q, $timeout, $http, $location, $rootScope) {
+    function checkLoggedIn(UserService, $q, $location) {
         var deferred = $q.defer();
-        $http.get('/api/project/loggedin').success(function (user) {
-            $rootScope.errorMessage = null;
-            if (user) {
-                console.log("config "+user);
-                $rootScope.currentUser = user;
-                deferred.resolve();
-            } else {
-                deferred.reject();
-                // $location.url('/');
-            }
-        });
-        return deferred.promise;
-    };
+        console.log("checkedLoggedIn");
+        UserService
+            .getLoggedInUser()
+            .then(
+                function (response) {
+                    var currentUser = response;
+                    if(currentUser) {
+                        UserService.setCurrentUser(currentUser);
+                        deferred.resolve();
+                    } else {
+                        deferred.reject();
+                        $location.url("/");
+                    }
+                },
+                function (err) {
+                    console.log(err);
+                    deferred.resolve();
+                }
+            );
 
-    var loggedIn = function ($q, $timeout, $http, $location, $rootScope) {
+        return deferred.promise;
+    }
+
+    function getLoggedIn(UserService, $q, $location) {
         var deferred = $q.defer();
-        $http.get('/api/project/loggedin').success(function (user) {
+        UserService
+            .getLoggedInUser()
+            .then(
+                function (response) {
+                    var currentUser = response.data;
+                    if(currentUser) {
+                        UserService.setCurrentUser(currentUser);
+                    }
+                    deferred.resolve();
+                },
+                function (err) {
+                    console.log(err);
+                    deferred.resolve();
+                }
+            );
 
-            if (!user) {
-                deferred.reject();
-            } else {
-
-                $rootScope.currentUser = user;
-
-                console.log("config " + user);
-                console.log($rootScope.currentUser);
-                deferred.resolve();
-            }
-        }).error(function (response) {
-            console.log(response);
-            deferred.reject();
-        });
         return deferred.promise;
-    };
+    }
 
         function configuration($routeProvider, $httpProvider) {
 
@@ -67,30 +76,48 @@
                     templateUrl: 'views/user/templates/profile.view.client.html',
                     controller: 'profileController',
                     controllerAs: 'model',
-                    resolve: {checkLoggedin: checkLoggedin}
+                    resolve: {checkLoggedIn: checkLoggedIn}
                 })
                 .when("/home",{
                     templateUrl: 'views/restaurant_home/templates/homeSearchPage.html',
                     controller: "HomeSearchController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+
                 })
                 .when("/user/restaurant/:rid",{
                     templateUrl: 'views/restaurant_home/templates/reviewPage.html',
                     controller: "ReviewController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+
 
                 })
                 .when("/user/restaurants",{
                     templateUrl: 'views/restaurant_home/templates/homeSearchPage.html',
                     controller: "HomeSearchController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+
 
                 })
                 .when("/", {
                     templateUrl: 'views/restaurant_home/templates/homeSearchPage.html',
                     controller: "HomeSearchController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
                 })
+                .otherwise({
+                    redirectTo: "/"
+                });
 
                 // .when("/user/:uid/website/new",{
                 //     templateUrl: 'views/website/templates/website-new.view.client.html',
@@ -157,12 +184,7 @@
                 //     controller: "FlickrImageSearchController",
                 //     controllerAs: "model"
                 // })
-                .otherwise({
-                    templateUrl: 'views/restaurant_home/templates/homeSearchPage.html',
-                    controller: "HomeSearchController",
-                    controllerAs: "model",
-                    resolve: {loggedIn: loggedIn}
-                });
+
 
 
         }

@@ -12,16 +12,18 @@ module.exports = function (app, model) {
     app.get("/api/project/user/:userId", findUserById);
     app.put("/api/project/user/:userId", updateUser);
     app.delete("/api/project/user/:userId", deleteUser);
-    app.post('/api/project/login', passport.authenticate('local'), login);
+    app.post('/api/project/login', passport.authenticate('project'), login);
     app.get("/auth/facebook", passport.authenticate('facebook', {scope: ['public_profile', 'email']}));
     app.post('/api/project/logout', logout);
-    app.get ('/api/project/loggedin', loggedin);
+    app.get ('/api/project/loggedin', getLoggedInUser);
 
 
     var userModel = model.userModel;
     var reviewModel = model.reviewModel;
     var LocalStrategy = require('passport-local').Strategy;
     // var FacebookStrategy = require('passport-facebook-token').Strategy;
+
+    passport.use('project', new LocalStrategy(projectLocalStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -33,12 +35,12 @@ module.exports = function (app, model) {
     //         res.redirect(redirectUrl);
     //     });
 
-    var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID || '456733637999245',
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET || '573e09fa495c89690d9cb0cfa0233c55',
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL || 'http://localhost:3000/project/index.html#/profile/',
-        profileFields: ['id', 'name', 'emails']
-    };
+    // var facebookConfig = {
+    //     clientID     : process.env.FACEBOOK_CLIENT_ID || '456733637999245',
+    //     clientSecret : process.env.FACEBOOK_CLIENT_SECRET || '573e09fa495c89690d9cb0cfa0233c55',
+    //     callbackURL  : process.env.FACEBOOK_CALLBACK_URL || 'http://localhost:3000/project/index.html#/profile/',
+    //     profileFields: ['id', 'name', 'emails']
+    // };
 
     // var users = [
     //     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder", email: "alice@gmail.com"  },
@@ -46,7 +48,7 @@ module.exports = function (app, model) {
     //     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia", email: "charly@gmail.com"  },
     //     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi", email: "jannunzi@gmail.com" }
     // ];
-    passport.use(new LocalStrategy(localStrategy));
+    // passport.use(new LocalStrategy(localStrategy));
 
     // passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     //
@@ -86,14 +88,36 @@ module.exports = function (app, model) {
     //         });
     // }
 
-    function localStrategy(username, password, done) {
+    // function localStrategy(username, password, done) {
+    //     userModel
+    //         .findUserByCredentials(username, password)
+    //         .then(
+    //             function (user) {
+    //                 if (user.username === username && user.password === password) {
+    //                     return done(null, user);
+    //                 } else {
+    //                     return done(null, false);
+    //                 }
+    //             },
+    //             function (err) {
+    //                 if (err) {
+    //                     return done(err);
+    //                 }
+    //             }
+    //         );
+    // }
+
+    function projectLocalStrategy(username, password, done) {
+        console.log(username, password);
         userModel
-            .findUserByCredentials(username, password)
+            .findUserByUsername(username)
             .then(
                 function (user) {
-                    if (user.username === username && user.password === password) {
+                    console.log(user);
+                    if (user && password == user.password) {
                         return done(null, user);
-                    } else {
+                    }
+                    else {
                         return done(null, false);
                     }
                 },
@@ -281,7 +305,9 @@ module.exports = function (app, model) {
         res.sendStatus(200);
     }
 
-    function loggedin(req, res) {
-        res.send(req.isAuthenticated() && req.user.type == "restaurant" ? req.user : null);
+    function getLoggedInUser(req, res) {
+        console.log("loggedin called");
+        var user = req.isAuthenticated()? req.user : null;
+        res.send(user);
     }
 }

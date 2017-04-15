@@ -13,7 +13,22 @@
 
         function init() {
             console.log("sappu")
-            vm.userid = $rootScope.currentUser._id
+            UserService
+                .getLoggedInUser()
+                .then(function (response) {
+                    var user = response.data;
+                    if (user) {
+                        vm.user = user;
+                        vm.userid = vm.user._id+"";
+                        console.log("++++++++++++++++++++++++++++"+ user);
+                        return UserService.findUserById(vm.userid);
+                    }
+                })
+                .then(function (response) {
+                    if (response) {
+                        vm.user = response;
+                    }
+                });
 
             ReviewService.findRestaurantById(vm.restaurantId)
                 .then(function (response) {
