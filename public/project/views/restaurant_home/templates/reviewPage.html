@@ -6,11 +6,11 @@
         </div>
         <div class="col-xs-12 col-md-8 col-sm-4">
             <div class="review-block-description">
-                <p><b class="wb-red ">Name:  </b> {{model.restaurant.name}}</p>
-                <p><b class="wb-red ">Address:  </b> {{model.restaurant.address}}</p>
-                <p><b class="wb-red ">City:  </b> {{model.restaurant.city}}</p>
-                <p><b class="wb-red ">State:  </b> {{model.restaurant.state}} - {{model.restaurant.postal_code}}</p>
-                <p><b class="wb-red ">Phone Number:  </b> {{model.restaurant.phone}}</p>
+                <p><b class="wb-red ">Name: </b> {{model.restaurant.name}}</p>
+                <p><b class="wb-red ">Address: </b> {{model.restaurant.address}}</p>
+                <p><b class="wb-red ">City: </b> {{model.restaurant.city}}</p>
+                <p><b class="wb-red ">State: </b> {{model.restaurant.state}} - {{model.restaurant.postal_code}}</p>
+                <p><b class="wb-red ">Phone Number: </b> {{model.restaurant.phone}}</p>
             </div>
         </div>
     </div>
@@ -20,31 +20,73 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-7">
-
             <div>
-
                 <div ng-repeat="review in model.reviews" class="row">
                     <hr/>
-                    <div class="col-xs-6 col-sm-6 col-md-6">
-                        <img ng-show="!review.imgUrl" src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="profile-small-image-size img-rounded">
-                        <img ng-show="review.imgUrl"  ng-src="{{review.imgUrl}}" class="profile-small-image-size img-rounded">
-                        <div class="review-block-name">
-                            <a ng-show="currentUser" href="" ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
+                    <div class='panel-body'>
+                        <div ng-if="model.selectedIndex === $index">
+                            <form>
+                                <div class="form-group">
+                    <textarea class="form-control" rows="3" placeholder="Description.."
+                              ng-model="model.editReview.description"></textarea>
+                                </div>
+                            </form>
                         </div>
-                        <div class="review-block-name">
-                            <a ng-show="!currentUser" href="">{{review.userName}}</a>
+                        <div ng-hide="model.selectedIndex === $index">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <img ng-show="!review.imgUrl" src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
+                                     class="profile-small-image-size img-rounded">
+                                <img ng-show="review.imgUrl" ng-src="{{review.imgUrl}}"
+                                     class="profile-small-image-size img-rounded">
+                                <div class="review-block-name">
+                                    <a ng-show="currentUser" href=""
+                                       ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
+                                </div>
+                                <div class="review-block-name">
+                                    <a ng-show="!currentUser" href="">{{review.userName}}</a>
+                                </div>
+                                <div class="review-block-date">{{review.dateCreated | date : 'mediumDate'}}<br/></div>
+                            </div>
+
+                            <div>
+                                <p ng-if="review.roles == 'critic'"><img class="critic-image"
+                                                                         src="../../../../images/critic.png"/> <b
+                                        class="critic">Critic's Review - </b></p>
+                                {{review.description}}
+                            </div>
                         </div>
-                        <div class="review-block-date">{{review.dateCreated | date : 'mediumDate'}}<br/></div>
+
+                        <div class="btn-group-md pull-right">
+                            <a href="" class="btn btn-success btn-sm" role="button"
+                               ng-if="model.selectedIndex == $index"
+                               ng-click="model.updateReview(model.editReview)">
+                                Update
+                            </a>
+                            <a href="" class="btn btn-danger btn-sm" role="button"
+                               ng-if="model.selectedIndex == $index"
+                               ng-click="model.cancelReview()">
+                                Cancel
+                            </a>
+                        </div>
+                        <div >
+                            <a href="" class="btn btn-warning btn-sm" role="button"
+                               ng-if="model.selectedIndex !== $index && currentUser._id == review.userId"
+                               ng-click="model.selectReview($index)">
+                                Edit
+                            </a>
+                            <a href="" class="btn btn-danger btn-sm" role="button"
+                               ng-if="model.selectedIndex !== $index && currentUser._id == review.userId"
+                               ng-click="model.deleteReview($index)">
+                                Delete
+                            </a>
+                        </div>
+                        <!--<div class="text-right custom-margin">-->
+                        <!--<a ng-show="currentUser._id == review.userId" class="btn btn-warning " href=""-->
+                        <!--ng-click="model.updateReview(review)">Update</a>-->
+                        <!--<a ng-show="currentUser._id == review.userId" class="btn btn-danger " href=""-->
+                        <!--ng-click="model.deleteReview(review)">Delete</a>-->
+                        <!--</div>-->
                     </div>
-
-                    <div>
-                        <p ng-if="review.roles == 'critic'"><img class = "critic-image" src = "../../../../images/critic.png"/> <b class="critic">Critic's Review - </b></p>
-                        {{review.description}}</div>
-                    <!--<div class="review-block-description">this was nice in buy. this was nice in buy. this was nice-->
-                    <!--in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy-->
-                    <!--this was nice in buy-->
-                    <!--</div>-->
-
                 </div>
 
             </div>
@@ -68,10 +110,11 @@
                                       placeholder="Enter your review here..." rows="5"></textarea>
                             <div class="text-right">
                                 <div class="text-right custom-margin">
-                                    <a ng-show="model.user" class="btn btn-success btn-lg" href="" ng-click="model.createReview(review)">Submit</a>
+                                    <a ng-show="model.user" class="btn btn-success btn-lg" href=""
+                                       ng-click="model.createReview(review)">Submit</a>
                                 </div>
                                 <div class="text-right custom-margin">
-                                    <a ng-show="!model.user" class="btn btn-warning btn-lg"  href="">Login Required</a>
+                                    <a ng-show="!model.user" class="btn btn-warning btn-lg" href="">Login Required</a>
                                 </div>
                             </div>
                         </div>

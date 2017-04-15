@@ -9,7 +9,9 @@
             findRestaurantById : findRestaurantById,
             findAllReviewsforRestaurant : findAllReviewsforRestaurant,
             findReviewsByUserId : findReviewsByUserId,
-            createReview : createReview
+            createReview : createReview,
+            updateReview : updateReview,
+            deleteReview : deleteReview
         };
         return api;
 
@@ -38,6 +40,14 @@
                 .then(function (res) {
                     return res.data;
                 });
+        }
+
+        function updateReview(restaurantId, reviewId, review) {
+            return $http.put("/api/project/restaurant/" + restaurantId + "/review/" + reviewId, review);
+        }
+
+        function deleteReview(restaurantId, reviewId) {
+            return $http.delete("/api/project/restaurant/" + restaurantId + "/review/" + reviewId);
         }
 
     }

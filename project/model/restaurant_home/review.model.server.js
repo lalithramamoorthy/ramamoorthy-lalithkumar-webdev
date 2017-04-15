@@ -9,7 +9,9 @@ module.exports = function () {
         createReview: createReview,
         findAllReviewsforRestaurant: findAllReviewsforRestaurant,
         findReviewsByUserId: findReviewsByUserId,
-        reviewModelDependency: reviewModelDependency
+        reviewModelDependency: reviewModelDependency,
+        updateReview: updateReview,
+        deleteReview: deleteReview
     };
     return api;
 
@@ -55,6 +57,16 @@ module.exports = function () {
                 }
             })
         return deferred.promise;
+    }
+
+    function updateReview(reviewId, review) {
+        delete review._id;
+        review.timestamp = new Date();
+        return reviewModel.update({_id: reviewId}, {$set: review});
+    }
+
+    function deleteReview(reviewId) {
+        return reviewModel.remove({_id: reviewId});
     }
 
 };

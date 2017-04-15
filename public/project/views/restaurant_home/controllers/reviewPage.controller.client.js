@@ -10,10 +10,13 @@
         console.log("ReviewsPage RestaurantId "+vm.restaurantId)
         vm.createReview = createReview;
         vm.navigateToUserPage = navigateToUserPage;
+        vm.selectReview = selectReview;
+        vm.updateReview = updateReview;
+        vm.deleteReview = deleteReview;
+        vm.cancelReview = cancelReview;
 
         function init() {
-            UserService
-                .getLoggedInUser()
+            UserService.getLoggedInUser()
                 .then(function (response) {
                     var user = response.data;
                     if (user) {
@@ -48,10 +51,40 @@
             ReviewService.createReview(review, vm.restaurantId, vm.userid)
                 .then(function (response) {;
                     if (response) {
+                        vm.selectedIndex = -1;
                         vm.reviews.push(response);
                         findUserByReviewUserId(vm.reviews);
                     }
                 })
+        }
+
+        function updateReview(review) {
+
+            ReviewService.updateReview(vm.restaurantId, review._id, review)
+                .then(function (response) {
+                    var status = response.data;
+                    if ((status.n == 1 || status.nModified == 1) && status.ok == 1) {
+                        vm.reviews[vm.selectedIndex] = review;
+                        vm.message = "Review updated";
+                        vm.selectedIndex = -1;
+                        findUserByReviewUserId(vm.reviews);
+                    }
+                });
+        }
+
+        function deleteReview(index) {
+            var reviewId = vm.reviews[index]._id;
+            ReviewService
+                .deleteReview(vm.movieId, reviewId)
+                .then(function (response) {
+                    var status = response.data;
+                    if (status.n == 1 && status.ok == 1) {
+                        vm.reviews.splice(index, 1);
+                        vm.selectedIndex = -1;
+                        vm.review = {};
+                        findUserByReviewUserId(vm.reviews);
+                    }
+                });
         }
 
         function findUserByReviewUserId(reviews) {
@@ -78,6 +111,22 @@
                 });
 
 
+        }
+
+        function selectReview(index) {
+            vm.selectedIndex = index;
+            var editReview = {
+                "restaurantId": vm.reviews[index]["restaurantId"],
+                "userId": vm.reviews[index]["userId"],
+                "_id": vm.reviews[index]["_id"],
+                "description": vm.reviews[index]["description"],
+                "timestamp": vm.reviews[index]["timestamp"]
+            }
+            vm.editReview = editReview;
+        }
+
+        function cancelReview() {
+            vm.selectedIndex = -1;
         }
 
     }
