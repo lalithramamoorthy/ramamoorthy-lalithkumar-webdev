@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var passport      = require('passport');
 var cookieParser  = require('cookie-parser');
-var session       = require('express-session')
+var session       = require('express-session');
 
 app.use(session({
     secret: 'this is the secret',
@@ -17,6 +17,11 @@ app.use(session({
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(session({
+    secret: process.env.SESSION_SECRET || "webdev",
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.set('view engine', 'ejs');
 
@@ -24,6 +29,9 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 // require ("./test/app.js")(app);
+var project = require("./project/app.js");
+project(app);
+
 var assignment = require("./assignment/app.js");
 assignment(app);
 

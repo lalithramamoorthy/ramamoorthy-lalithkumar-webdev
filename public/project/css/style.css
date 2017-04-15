@@ -1,0 +1,116 @@
+
+.gallery_product {
+    margin-bottom: 30px;
+}
+
+.coralbg {
+    background-color: #FA396F;
+}
+
+.coral {
+    color: #FA396f;
+}
+
+.turqbg {
+    background-color: #46D8D2;
+}
+
+.turq {
+    color: #46D8D2;
+}
+
+.wb-red-bg {
+    background-color: #822433;
+}
+
+.wb-red {
+    color: #822433;
+}
+
+.white {
+    color: #fff !important;
+}
+
+.custom-margin{
+    margin-top: 10px;
+}
+
+div.user-menu-container {
+    z-index: 10;
+    background-color: #fff;
+    margin-top: 20px;
+    background-clip: padding-box;
+    opacity: 0.97;
+    filter: alpha(opacity=97);
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+}
+
+div.user-menu-container .btn-lg {
+    padding: 0px 12px;
+}
+
+div.user-menu-container h4 {
+    font-weight: 300;
+    color: #8b8b8b;
+}
+
+div.user-menu-container a, div.user-menu-container .btn {
+    transition: 1s ease;
+}
+
+div.user-menu-container .thumbnail {
+    width: 100%;
+    min-height: 200px;
+    border: 0px !important;
+    padding: 0px;
+    border-radius: 0;
+    border: 0px !important;
+}
+
+.search-background img {
+    width: 100%;
+}
+
+.well-searchbox {
+    z-index: 80;
+    /*background: rgba(0, 0, 0, 0.6);*/
+}
+
+.well-searchbox label {
+    color: #fff;
+}
+
+#responsiveForm {
+    background-image: url("http://weknowyourdreams.com/images/restaurant/restaurant-05.jpg");
+    /*background-size: 100% 100%;*/
+    padding: 80px;
+    padding-top: 120px;
+    background-size: cover;
+}
+
+.page-background {
+    z-index: -1;
+}
+
+.stars
+{
+    margin: 20px 0;
+    font-size: 24px;
+    color: #d17581;
+}
+
+.navbar-brand-centered {
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: 160px;
+    text-align: center;
+    background-color: transparent;
+}
+.navbar>.container .navbar-brand-centered,
+.navbar>.container-fluid .navbar-brand-centered {
+    margin-left: -80px;
+}
+
+

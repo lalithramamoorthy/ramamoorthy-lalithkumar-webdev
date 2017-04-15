@@ -79,14 +79,20 @@ module.exports = function (app, model) {
         var widgetId = req.body.widgetId;
         var userId = req.body.userId;
         var websiteId = req.body.websiteId;
+        var pageId = req.body.pageId;
         var myFile = req.file;
+        widgetModel.findWidgetById (widgetId)
+            .then(function (widget) {
+                widget.url = req.protocol + '://' + req.get('host') + "/uploads/" + myFile.filename;
+                res.redirect(req.get('referrer') + "#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget");
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+        // widget = widgets.find(function (i) {
+        //     return i._id == widgetId;
+        // });
 
-        widget = widgets.find(function (i) {
-            return i._id == widgetId;
-        });
 
-        widget.url = req.protocol + '://' + req.get('host') + "/uploads/" + myFile.filename;
-        res.redirect(req.get('referrer') + "#/user/" + userId + "/website/" + websiteId + "/page/" + widget.pageId + "/widget");
     }
 
     function deleteWidget(req, res) {

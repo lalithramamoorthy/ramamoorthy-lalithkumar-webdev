@@ -1,0 +1,58 @@
+<div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-4 col-sm-4">
+            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+            <div class = "custom-margin" ng-show="currentUser._id != model.userid">
+                <a href=""
+                   ng-click="model.followUser()"
+                   ng-hide="model.isFollowingAlready"
+                   class="btn-sm btn-success">Follow
+                </a>
+                <a href=""
+                   ng-click="model.unFollowUser()"
+                   ng-show="model.isFollowingAlready"
+                   class="btn-sm btn-danger">Unfollow
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-8 col-sm-4">
+            <div class="review-block-description">
+                <p><b class="wb-red ">Name:  </b> {{model.user.firstName}}</p>
+                <p><b class="wb-red ">Address:  </b> {{model.user.lastName}}</p>
+                <p><b class="wb-red ">City:  </b> {{model.user.email}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7">
+
+            <div>
+
+                <div ng-repeat="review in model.reviews" class="row">
+                    <hr/>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                        <div class="review-block-name"><a href="" ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
+                        </div>
+                        <div class="review-block-date">{{review.dateCreated | date : 'mediumDate'}}<br/></div>
+                    </div>
+
+                    <div>{{review.description}}</div>
+                    <!--<div class="review-block-description">this was nice in buy. this was nice in buy. this was nice-->
+                    <!--in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy-->
+                    <!--this was nice in buy-->
+                    <!--</div>-->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

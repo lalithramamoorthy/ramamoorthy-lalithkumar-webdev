@@ -1,0 +1,81 @@
+<div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-4 col-sm-4">
+            <!--<img ng-src="{{model.restaurant.image_url}}" class="img-rounded">-->
+        </div>
+        <div class="col-xs-12 col-md-8 col-sm-4">
+            <div class="review-block-description">
+                <p><b class="wb-red ">Name:  </b> {{model.restaurant.name}}</p>
+                <p><b class="wb-red ">Address:  </b> {{model.restaurant.address}}</p>
+                <p><b class="wb-red ">City:  </b> {{model.restaurant.city}}</p>
+                <p><b class="wb-red ">State:  </b> {{model.restaurant.state}} - {{model.restaurant.postal_code}}</p>
+                <p><b class="wb-red ">Phone Number:  </b> {{model.restaurant.phone}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7">
+
+            <div>
+
+                <div ng-repeat="review in model.reviews" class="row">
+                    <hr/>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                        <div class="review-block-name">
+                            <a ng-show="currentUser" href="" ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
+                        </div>
+                        <div class="review-block-name">
+                            <a ng-show="!currentUser" href="">{{review.userName}}</a>
+                        </div>
+                        <div class="review-block-date">{{review.dateCreated | date : 'mediumDate'}}<br/></div>
+                    </div>
+
+                    <div>{{review.description}}</div>
+                    <!--<div class="review-block-description">this was nice in buy. this was nice in buy. this was nice-->
+                    <!--in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy-->
+                    <!--this was nice in buy-->
+                    <!--</div>-->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+                <div class="text-right">
+                    <h3>Leave a Review</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <textarea ng-model="review.description" class="form-control" cols="50"
+                                      id="new-review" name="comment"
+                                      placeholder="Enter your review here..." rows="5"></textarea>
+                            <div class="text-right">
+                                <div class="text-right custom-margin">
+                                    <a ng-show="currentUser" class="btn btn-success btn-lg" href="" ng-click="model.createReview(review)">Success</a>
+                                </div>
+                                <div class="text-right custom-margin">
+                                    <a ng-show="!currentUser" class="btn btn-warning btn-lg"  href="">Login Required</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
