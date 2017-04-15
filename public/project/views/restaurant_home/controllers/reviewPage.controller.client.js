@@ -7,7 +7,6 @@
         var vm = this;
         // vm.userid = $routeParams.uid;
         vm.restaurantId = $routeParams.rid;
-        console.log("ReviewsPage RestaurantId "+vm.restaurantId)
         vm.createReview = createReview;
         vm.navigateToUserPage = navigateToUserPage;
         vm.selectReview = selectReview;
@@ -65,8 +64,9 @@
                     var status = response.data;
                     if ((status.n == 1 || status.nModified == 1) && status.ok == 1) {
                         vm.reviews[vm.selectedIndex] = review;
-                        vm.message = "Review updated";
                         vm.selectedIndex = -1;
+                        vm.review = {};
+                        vm.message = "Review updated";
                         findUserByReviewUserId(vm.reviews);
                     }
                 });
@@ -100,7 +100,6 @@
             });
         }
 
-
         function navigateToUserPage(username) {
             UserService.findUserByFirstName(username)
                 .then(function (response) {
@@ -120,7 +119,7 @@
                 "userId": vm.reviews[index]["userId"],
                 "_id": vm.reviews[index]["_id"],
                 "description": vm.reviews[index]["description"],
-                "timestamp": vm.reviews[index]["timestamp"]
+                "dateCreated": vm.reviews[index]["dateCreated"]
             }
             vm.editReview = editReview;
         }
