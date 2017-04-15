@@ -21,17 +21,17 @@ module.exports = function (app, model) {
     var userModel = model.userModel;
     var reviewModel = model.reviewModel;
     var LocalStrategy = require('passport-local').Strategy;
-    var FacebookStrategy = require('passport-facebook-token').Strategy;
+    // var FacebookStrategy = require('passport-facebook-token').Strategy;
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
-    app.get("/auth/facebook/callback", passport.authenticate('facebook', {
-            failureRedirect: '/assignment/#/login'
-        }),
-        function (req, res) {
-            var redirectUrl = "/assignment/index.html#/user/" + req.user._id.toString();
-            res.redirect(redirectUrl);
-        });
+    // app.get("/auth/facebook/callback", passport.authenticate('facebook', {
+    //         failureRedirect: '/assignment/#/login'
+    //     }),
+    //     function (req, res) {
+    //         var redirectUrl = "/assignment/index.html#/user/" + req.user._id.toString();
+    //         res.redirect(redirectUrl);
+    //     });
 
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID || '456733637999245',
@@ -47,43 +47,44 @@ module.exports = function (app, model) {
     //     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi", email: "jannunzi@gmail.com" }
     // ];
     passport.use(new LocalStrategy(localStrategy));
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
-    function facebookStrategy(token, refreshToken, profile, done) {
-        model.findUserByFacebookId(profile.id)
-            .then(function (user) {
-                if (user) {
-                    return done(null, user);
-                }
-                else {
-                    var email = profile.emails[0].value;
-                    var emailParts = email.split("@");
-                    var newUser = {
-                        facebook: {
-                            id: profile.id,
-                            token: token
-                        },
-
-                        username: emailParts[0],
-                        firstName: profile.name.givenName,
-                        lastName: profile.name.familyName,
-                        email: email
-                    };
-                    model.createUser(newUser)
-                        .then(function (newUser) {
-                                if (newUser) {
-                                    return done(null, newUser);
-                                }
-                                else {
-                                    return done(null, false, {message: "User not created."})
-                                }
-                            },
-                            function (err) {
-                                return done(err);
-                            });
-                }
-            });
-    }
+    // passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    //
+    // function facebookStrategy(token, refreshToken, profile, done) {
+    //     model.findUserByFacebookId(profile.id)
+    //         .then(function (user) {
+    //             if (user) {
+    //                 return done(null, user);
+    //             }
+    //             else {
+    //                 var email = profile.emails[0].value;
+    //                 var emailParts = email.split("@");
+    //                 var newUser = {
+    //                     facebook: {
+    //                         id: profile.id,
+    //                         token: token
+    //                     },
+    //
+    //                     username: emailParts[0],
+    //                     firstName: profile.name.givenName,
+    //                     lastName: profile.name.familyName,
+    //                     email: email
+    //                 };
+    //                 model.createUser(newUser)
+    //                     .then(function (newUser) {
+    //                             if (newUser) {
+    //                                 return done(null, newUser);
+    //                             }
+    //                             else {
+    //                                 return done(null, false, {message: "User not created."})
+    //                             }
+    //                         },
+    //                         function (err) {
+    //                             return done(err);
+    //                         });
+    //             }
+    //         });
+    // }
 
     function localStrategy(username, password, done) {
         userModel
