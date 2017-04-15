@@ -12,15 +12,13 @@
         return api;
 
         function getRestaurantsByCity(city) {
-            console.log("restaurant service");
             var url = searchURL
                 .replace("city=", "city="+city);
             return $http.get(url);
         }
 
-        function getRestaurantsByNameAndCity(city, name) {
+        function getRestaurantsByNameAndCity(name) {
             var url = searchURL
-                .replace("city=", "city="+city)
                 .replace("name=", "name="+name);
             return $http.get(url);
         }

@@ -9,7 +9,6 @@
         vm.getRestaurantsByNameAndCity = getRestaurantsByNameAndCity;
 
         function init() {
-            console.log("sappu home");
             vm.getRestaurantsByCity("boston");
         }
 
@@ -37,7 +36,7 @@
 
         function getRestaurantsByNameAndCity(rest) {
             RestaurantService
-                .getRestaurantsByNameAndCity(rest.city, rest.name)
+                .getRestaurantsByNameAndCity(rest.name)
                 .then(
                     function (response) {
                         var restaurants = response;

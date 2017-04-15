@@ -4,24 +4,16 @@
         <div id="responsiveForm" class="container">
             <div class="row">
                 <div>
-                    <form class=" form-inline well-searchbox" role="form">
-                        <div class=" form-group">
-                            <label class="control-label">City</label>
-                            <div class="">
-                                <input type="text" ng-model="rest.city" class="form-control" placeholder="Keyword">
-                            </div>
-                        </div>
-
+                    <form role="form">
                         <div class="form-group ">
-                            <label class=" control-label">Name</label>
-                            <div class="">
+                            <label class=" name-label">Find Restaurant</label>
+
                                 <div class="">
                                     <input type="text" ng-model="rest.name" class="form-control" placeholder="Keyword">
                                 </div>
-                            </div>
                         </div>
 
-                        <div>
+                        <div class="form-group ">
                             <button ng-click="model.getRestaurantsByNameAndCity(rest)" type="submit"
                                     class="btn btn-success">Search
                             </button>
