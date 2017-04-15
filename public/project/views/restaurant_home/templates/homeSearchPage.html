@@ -30,16 +30,14 @@
 
             <div class="">
                 <div>
-                    <a href="#/user/restaurant/{{restaurant.id}}"> <img width="100%" class="img-rounded"
+                    <a href="#/user/restaurant/{{restaurant.id}}"> <img width="180px" height="180px" class="img-rounded"
                                      src="{{restaurant.image_url}}"/></a>
                 </div>
-                <div>{{restaurant.name}}</div>
+                <div><b class="wb-red ">Name:  </b> {{restaurant.name}}</div>
             </div>
             <div>
-                <span>{{restaurant.city}} - {{restaurant.country}}</span>
-                <span>{{restaurant.name}}</span>
-                <span>{{restaurant.city}}</span>
-                <span>{{restaurant.address}}</span>
+                <p><b class="wb-red ">Address:  </b>{{restaurant.address}}</p>
+                <p><b class="wb-red ">City:  </b> {{restaurant.city}} - {{restaurant.country}}</p>
             </div>
         </div>
     </div>
