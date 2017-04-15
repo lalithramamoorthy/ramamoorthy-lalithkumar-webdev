@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-4 col-sm-4">
-            <img class="thumbnail image-size"
+            <img class="thumbnail profile-image-size"
                  src="../../images/default.png" alt="" ng-show="!model.user.imgUrl">
             <img  class="thumbnail profile-image-size img-rounded"
                   ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
@@ -21,9 +21,11 @@
         </div>
         <div class="col-xs-12 col-md-8 col-sm-4">
             <div class="review-block-description">
-                <p><b class="wb-red ">Name:  </b> {{model.user.firstName}}</p>
-                <p><b class="wb-red ">Address:  </b> {{model.user.lastName}}</p>
-                <p><b class="wb-red ">City:  </b> {{model.user.email}}</p>
+                <p><b class="wb-red ">FirstName:  </b> {{model.user.firstName}}</p>
+                <p><b class="wb-red ">LastName:  </b> {{model.user.lastName}}</p>
+                <p><b class="wb-red ">Role:  </b> {{model.user.roles}}</p>
+                <p><b class="wb-red ">Followers:  </b> {{model.user.followers.length}}</p>
+                <p><b class="wb-red ">Following:  </b> {{model.user.following.length}}</p>
             </div>
         </div>
     </div>
@@ -40,8 +42,8 @@
                 <div ng-repeat="review in model.reviews" class="row">
                     <hr/>
                     <div class="col-xs-6 col-sm-6 col-md-6">
-                        <img class=" profile-image-size" src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
-                             src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" alt="" ng-show="!model.user.imgUrl">
+                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
+                             alt="" ng-show="!model.user.imgUrl">
                         <img  class=" profile-small-image-size img-rounded"
                               ng-show="review.user.imgUrl" ng-src="{{review.user.imgUrl}}">
                         <div class="review-block-name"><a href="" ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>

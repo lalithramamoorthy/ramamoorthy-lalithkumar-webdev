@@ -52,7 +52,7 @@
                    type="text"
                    placeholder="First Name" required/>
             <p ng-show="registrationForm.firstName.$invalid && !registrationForm.firstName.$pristine"
-               class="help-block">Please enter the same password as above.</p>
+               class="help-block">Please enter the first name.</p>
         </div>
 
         <div class="form-group">
@@ -63,7 +63,18 @@
                    type="text"
                    placeholder="Last Name" required/>
             <p ng-show="registrationForm.lastName.$invalid && !registrationForm.lastName.$pristine"
-               class="help-block">Please enter the same password as above.</p>
+               class="help-block">Please enter the last name.</p>
+        </div>
+
+        <div class="form-group">
+            <input id="role"
+                   ng-model="model.user.roles"
+                   class="form-control"
+                   name="role"
+                   type="text"
+                   placeholder="Role" required/>
+            <p ng-show="registrationForm.role.$invalid && !registrationForm.role.$pristine"
+               class="help-block">Please enter the role.</p>
         </div>
 
         <div class="row">

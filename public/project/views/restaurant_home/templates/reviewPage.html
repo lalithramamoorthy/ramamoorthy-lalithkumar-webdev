@@ -37,7 +37,9 @@
                         <div class="review-block-date">{{review.dateCreated | date : 'mediumDate'}}<br/></div>
                     </div>
 
-                    <div>{{review.description}}</div>
+                    <div>
+                        <p ng-if="review.roles == 'critic'"><img class = "critic-image" src = "../../../../images/critic.png"/> <b class="critic">Critic's Review - </b></p>
+                        {{review.description}}</div>
                     <!--<div class="review-block-description">this was nice in buy. this was nice in buy. this was nice-->
                     <!--in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy-->
                     <!--this was nice in buy-->
@@ -66,7 +68,7 @@
                                       placeholder="Enter your review here..." rows="5"></textarea>
                             <div class="text-right">
                                 <div class="text-right custom-margin">
-                                    <a ng-show="model.user" class="btn btn-success btn-lg" href="" ng-click="model.createReview(review)">Success</a>
+                                    <a ng-show="model.user" class="btn btn-success btn-lg" href="" ng-click="model.createReview(review)">Submit</a>
                                 </div>
                                 <div class="text-right custom-margin">
                                     <a ng-show="!model.user" class="btn btn-warning btn-lg"  href="">Login Required</a>

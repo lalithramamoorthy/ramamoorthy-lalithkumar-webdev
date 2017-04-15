@@ -23,6 +23,16 @@
     background-color: #822433;
 }
 
+.critic {
+    background-color: #ffe45c ;
+    color:#0f0f0f;
+}
+
+.critic-image {
+    height:15px;
+    width: 15px;
+}
+
 .wb-red {
     color: #822433;
 }

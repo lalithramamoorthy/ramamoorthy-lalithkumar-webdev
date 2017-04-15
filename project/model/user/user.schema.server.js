@@ -16,7 +16,7 @@ module.exports = function () {
             token: String
         },
         type: {type: String, default: "restaurant"},
-        roles: {type: String, default: "user", enum: ["user", "admin"]}
+        roles: {type: String, default: "user", enum: ["user", "admin", "critic"]}
     }, {collection: 'MongooseWebAppProject.user'});
 
     return userSchema;

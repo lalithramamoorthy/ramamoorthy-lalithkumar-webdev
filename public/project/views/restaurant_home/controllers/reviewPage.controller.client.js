@@ -61,6 +61,7 @@
                         if (response) {
                             reviews[index].userName = response.firstName;
                              reviews[index].imgUrl = response.imgUrl;
+                            reviews[index].roles = response.roles;
                         }
                     });
             });
