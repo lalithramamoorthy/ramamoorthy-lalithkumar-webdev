@@ -21,7 +21,7 @@ module.exports = function (app, model) {
     var userModel = model.userModel;
     var reviewModel = model.reviewModel;
     var LocalStrategy = require('passport-local').Strategy;
-    var FacebookStrategy = require('passport-facebook').Strategy;
+    var FacebookStrategy = require('passport-facebook-token').Strategy;
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
