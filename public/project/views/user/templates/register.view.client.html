@@ -66,17 +66,6 @@
                class="help-block">Please enter the last name.</p>
         </div>
 
-        <div class="form-group">
-            <input id="role"
-                   ng-model="model.user.roles"
-                   class="form-control"
-                   name="role"
-                   type="text"
-                   placeholder="Role" required/>
-            <p ng-show="registrationForm.role.$invalid && !registrationForm.role.$pristine"
-               class="help-block">Please enter the role.</p>
-        </div>
-
         <div class="row">
             <div class="col-sm-3 col-sm-offset-3">
                 <button type="submit" class="btn btn-primary btn-block" ng-disabled="registrationForm.$invalid">
