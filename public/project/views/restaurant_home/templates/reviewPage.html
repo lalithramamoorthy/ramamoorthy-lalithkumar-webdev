@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-4 col-sm-4">
-            <!--<img ng-src="{{model.restaurant.image_url}}" class="img-rounded">-->
+            <img ng-src="{{model.restaurant.image_url}}" class="img-rounded">
         </div>
         <div class="col-xs-12 col-md-8 col-sm-4">
             <div class="review-block-description">
@@ -26,7 +26,8 @@
                 <div ng-repeat="review in model.reviews" class="row">
                     <hr/>
                     <div class="col-xs-6 col-sm-6 col-md-6">
-                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                        <img ng-show="!review.imgUrl" src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="profile-small-image-size img-rounded">
+                        <img ng-show="review.imgUrl"  ng-src="{{review.imgUrl}}" class="profile-small-image-size img-rounded">
                         <div class="review-block-name">
                             <a ng-show="currentUser" href="" ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
                         </div>

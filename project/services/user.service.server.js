@@ -1,8 +1,14 @@
 module.exports = function (app, model) {
     var passport = require('passport');
 
+    var auth = authorized;
+    var multer = require('multer');
+    var uploadsFolderPath = __dirname + '/../../public/uploads';
+    var upload = multer({dest: uploadsFolderPath});
+
     app.get("/api/project/user", findUser);
     app.post("/api/project/user", createUser);
+    app.post("/api/project/user/:id", upload.single('profileImg'), updateProfilePicture);
     app.put("/api/project/user/:loggedInUser/following/:userid", followUser);
     app.put("/api/project/user/:loggedInUser/unfollows/:userid", unFollowUser);
     app.get('/api/project/user/:loggedInUser/isFollowingAlready/:userid', isFollowingAlready);
@@ -16,6 +22,10 @@ module.exports = function (app, model) {
     app.get("/auth/facebook", passport.authenticate('facebook', {scope: ['public_profile', 'email']}));
     app.post('/api/project/logout', logout);
     app.get ('/api/project/loggedin', getLoggedInUser);
+    app.get("/api/project/admin/user", auth, findAllUsersAdmin);
+    app.post("/api/project/admin/user", auth, createAdminUser);
+    app.delete('/api/project/admin/user/:userId', auth, deleteAdminUser);
+    app.put('/api/project/admin/user/:userId', auth, updateAdminUser);
 
 
     var userModel = model.userModel;
@@ -148,8 +158,10 @@ module.exports = function (app, model) {
     }
 
     function updateUser(req, res) {
+
         var userId = req.params.userId;
         var newUser = req.body;
+        console.log("++++++++++"+req.body);
         userModel.updateUser(userId, newUser)
             .then(function (user) {
                 res.send(user);
@@ -309,5 +321,146 @@ module.exports = function (app, model) {
         console.log("loggedin called");
         var user = req.isAuthenticated()? req.user : null;
         res.send(user);
+    }
+
+    function findAllUsers(res) {
+        userModel.findAllUsers()
+            .then(
+                function (users) {
+                    res.json(users);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function authorized(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
+
+    function findAllUsersAdmin(req, res) {
+        if (isAdmin(req.user)) {
+            userModel.findAllUsers()
+                .then( function (users) {
+                        res.json(users);
+                    },
+                    function () {
+                        res.status(400).send(err);
+                    }
+                );
+        } else {
+            res.status(403);
+        }
+    }
+
+    function isAdmin(user) {
+        if (user.roles.indexOf("admin") > -1) {
+            return true
+        }
+        return false;
+    }
+
+    function createAdminUser(req, res) {
+        var newUser = req.body;
+        userModel.findUserByUsername(newUser.username)
+            .then(
+                function (user) {
+                    if (user == null) {
+                        return userModel.createUser(newUser)
+                            .then(function () {
+                                    return userModel.findAllUsers();
+                                }, function (err) {
+                                    res.status(400).send(err);
+                                });
+                    } else {
+                        return userModel.findAllUsers();
+                    }
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }).then(
+                function (users) {
+                    res.json(users);
+                },
+                function () {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function deleteAdminUser(req, res) {
+        if (isAdmin(req.user)) {
+            userModel.deleteUser(req.params.userId)
+                .then( function (user) {
+                        return userModel.findAllUsers();
+                    }, function (err) {
+                        res.status(400).send(err);
+                    }
+                )
+                .then(function (users) {
+                        res.json(users);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+        } else {
+            res.status(403);
+        }
+    }
+
+    function updateAdminUser(req, res) {
+        var newUser = req.body;
+        if (!isAdmin(req.user)) {
+            delete newUser.roles;
+        }
+        userModel.updateUser(req.params.userId, newUser)
+            .then(function (user) {
+                    return userModel.findAllUsers();
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(function (users) {
+                    res.json(users);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function updateProfilePicture(req, res) {
+        var userId = req.params.id;
+        var user = req.body;
+        var imageFile = req.file;
+        if (imageFile) {
+            var destination = imageFile.destination;
+            var path = imageFile.path;
+            var originalname = imageFile.originalname;
+            var size = imageFile.size;
+            var mimetype = imageFile.mimetype;
+            var filename = imageFile.filename;
+            user.imgUrl = "/uploads/" + filename;
+        }
+        userModel.updateUser(userId, user)
+            .then(function (response) {
+                    return userModel.findUserById(userId);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                })
+            .then(function (response) {
+                req.session.currentUser = response;
+                res.redirect(req.header('Referer') + "#/profile/" + userId);
+            }, function (err) {
+                res.status(400).send(err);
+            });
     }
 }

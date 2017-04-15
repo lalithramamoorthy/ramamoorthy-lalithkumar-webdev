@@ -7,7 +7,7 @@
             var vm = this;
             var userId = $routeParams['uid'];
             vm.deleteU = deleteU;
-            vm.update = update;
+            vm.Update = Update;
             vm.logout = logout;
 
             function init() {
@@ -15,6 +15,7 @@
                     .then(function (user) {
                         vm.user = user;
                     });
+                vm.updateProfilePicture = "/api/project/user/" + userId;
             }
 
             init();
@@ -29,7 +30,7 @@
                         });
             }
 
-            function update(newUser) {
+            function Update(newUser) {
                 UserService
                     .updateUser(userId, newUser)
                     .then(function (user) {

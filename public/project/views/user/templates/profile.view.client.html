@@ -2,42 +2,65 @@
 
 <div class="container-fluid">
 
-    <div class="alert alert-danger" ng-show="model.error">
-        {{model.error}}
-    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-4 col-sm-4">
+            <img class="thumbnail image-size"
+                 src="../../../images/default.png" alt="" ng-show="!model.user.imgUrl">
+            <img class="thumbnail profile-image-size img-rounded"
+                 ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
+        </div>
 
-    <div class="alert alert-success" ng-show="model.message">
-        {{model.message}}
+        <div class="alert alert-danger" ng-show="model.error">
+            {{model.error}}
+        </div>
+
+        <div class="alert alert-success" ng-show="model.message">
+            {{model.message}}
+        </div>
     </div>
-    <form>
+    <form action="{{model.updateProfilePicture}}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="username">Username</label>
             <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input ng-model="model.user.password" type="password" class="form-control" id="password" placeholder="Username">
+            <input ng-model="model.user.password" type="password" class="form-control" id="password"
+                   placeholder="Username">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input  ng-model="model.user.email" type="email" class="form-control" id="email" placeholder="Email">
+            <input ng-model="model.user.email" type="email" class="form-control" id="email" placeholder="Email">
         </div>
         <div class="form-group">
             <label for="first-name">First Name</label>
-            <input  ng-model="model.user.firstName" type="text" class="form-control" id="first-name" placeholder="First Name">
+            <input ng-model="model.user.firstName" type="text" class="form-control" id="first-name"
+                   placeholder="First Name">
         </div>
         <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input  ng-model="model.user.lastName" type="text" class="form-control" id="last-name" placeholder="Last Name">
+            <input ng-model="model.user.lastName" type="text" class="form-control" id="last-name"
+                   placeholder="Last Name">
+        </div>
+        <div class="form-group">
+            <label for="upload">Profile Pic</label>
+            <input id="upload" type="file" class="form-control"
+                   name="profileImg">
+        </div>
+        <div class="form-group">
+            <button type="submit" ng-click="model.Update(user)"
+                    class="btn btn-success btn-block">Update
+            </button>
         </div>
     </form>
 
     <a class="btn btn-primary btn-block"
        ng-href="#/user/restaurants">Restaurants</a>
-    <a ng-click="model.update(model.user)"
-       class="btn btn-primary btn-block">
-        Update
-    </a>
+
+    <!--<a ng-click="model.update(model.user)"-->
+    <!--class="btn btn-primary btn-block">-->
+    <!--Update-->
+    <!--</a>-->
 
     <a ng-click="model.deleteU()"
        class="btn btn-primary btn-block">
@@ -47,13 +70,3 @@
     <a class="btn btn-danger  btn-block"
        ng-click="model.logout()">Logout</a>
 </div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text" >
-            <a  ng-href="#/user/{{model.userId}}" class="navbar-link ">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-        </div>
-    </div>
-</nav>

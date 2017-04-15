@@ -2,7 +2,10 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-4 col-sm-4">
-            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+            <img class="thumbnail image-size"
+                 src="../../images/default.png" alt="" ng-show="!model.user.imgUrl">
+            <img  class="thumbnail profile-image-size img-rounded"
+                  ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
             <div class = "custom-margin" ng-show="currentUser._id != model.userid">
                 <a href=""
                    ng-click="model.followUser()"
@@ -37,7 +40,10 @@
                 <div ng-repeat="review in model.reviews" class="row">
                     <hr/>
                     <div class="col-xs-6 col-sm-6 col-md-6">
-                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                        <img class=" profile-image-size" src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
+                             src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" alt="" ng-show="!model.user.imgUrl">
+                        <img  class=" profile-small-image-size img-rounded"
+                              ng-show="review.user.imgUrl" ng-src="{{review.user.imgUrl}}">
                         <div class="review-block-name"><a href="" ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
                         </div>
                         <div class="review-block-date">{{review.dateCreated | date : 'mediumDate'}}<br/></div>

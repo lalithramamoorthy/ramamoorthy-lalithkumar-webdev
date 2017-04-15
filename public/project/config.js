@@ -5,7 +5,6 @@
 
     function checkLoggedIn(UserService, $q, $location) {
         var deferred = $q.defer();
-        console.log("checkedLoggedIn");
         UserService
             .getLoggedInUser()
             .then(
@@ -24,6 +23,32 @@
                     deferred.resolve();
                 }
             );
+
+        return deferred.promise;
+    }
+    function checkAdmin(UserService, $q, $location) {
+        var deferred = $q.defer();
+
+        UserService
+            .getLoggedInUser()
+            .then(function (response) {
+                var user = response.data;
+
+                if (user) {
+                    if (user != null && user.roles == 'admin') {
+                        UserService.setCurrentUser(user);
+                        deferred.resolve();
+                    }
+                    else {
+                        deferred.reject();
+                        $location.url("/");
+                    }
+                }
+                else {
+                    deferred.reject();
+                    $location.url("/");
+                }
+            });
 
         return deferred.promise;
     }
@@ -94,8 +119,6 @@
                     resolve: {
                         getLoggedIn: getLoggedIn
                     }
-
-
                 })
                 .when("/user/restaurants",{
                     templateUrl: 'views/restaurant_home/templates/homeSearchPage.html',
@@ -104,8 +127,14 @@
                     resolve: {
                         getLoggedIn: getLoggedIn
                     }
-
-
+                })
+                .when("/user/admin", {
+                    templateUrl: 'views/user/templates/admin.view.client.html',
+                    controller: "AdminController",
+                    controllerAs: "model",
+                    resolve: {
+                        checkAdmin: checkAdmin
+                    }
                 })
                 .when("/", {
                     templateUrl: 'views/restaurant_home/templates/homeSearchPage.html',

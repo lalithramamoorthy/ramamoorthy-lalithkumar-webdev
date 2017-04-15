@@ -11,6 +11,7 @@ module.exports = function () {
         updateUser: updateUser,
         deleteUser: deleteUser,
         findUserById: findUserById,
+        findAllUsers: findAllUsers,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         findUserByFacebookId: findUserByFacebookId,
@@ -52,6 +53,10 @@ module.exports = function () {
                 }
             });
         return deferred.promise;
+    }
+
+    function findAllUsers() {
+        return userModel.find();
     }
 
     function deleteUser(_id) {

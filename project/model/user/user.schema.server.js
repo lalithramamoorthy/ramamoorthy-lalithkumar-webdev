@@ -9,12 +9,14 @@ module.exports = function () {
         phone: String,
         followers:[String],
         following:[String],
+        imgUrl: String,
         dateCreated: {type: Date, default: Date.now},
         facebook: {
             id:    String,
             token: String
         },
-        type: {type: String, default: "restaurant"}
+        type: {type: String, default: "restaurant"},
+        roles: {type: String, default: "user", enum: ["user", "admin"]}
     }, {collection: 'MongooseWebAppProject.user'});
 
     return userSchema;

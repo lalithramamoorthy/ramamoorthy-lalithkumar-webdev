@@ -11,35 +11,29 @@
         }
         init();
 
-        // function create(user) {
-        //     UserService
-        //         .findUserByUsername(user.username)
-        //         .success(function (user) {
-        //             vm.error = "sorry that username is taken"
-        //         })
-        //         .error(function(){
-        //             UserService
-        //                 .createUser(user)
-        //                 .success(function(user){
-        //                     $location.url('/profile/' + user._id);
-        //                 })
-        //                 .error(function () {
-        //                     vm.error = 'sorry could not register';
-        //                 });
-        //         });
-        // }
-
         function create(user) {
-            UserService.createUser(user)
-                .then(function (usr) {
-                    if(usr) {
-                        var user = usr.data;
-                        $rootScope.currentUser = user;
-                        $location.url("/user/" + usr._id);
-                    } else {
-                        vm.error = "Username already exist";
-                    }
-                });
+            if (vm.password2 !== user.password) {
+                vm.error = "Passwords entered do not match";
+            }
+            else {
+                UserService.findUserByUsername(user.username)
+                    .then(function (response) {
+                        if (response) {
+                            vm.error = "Username is taken!!."
+                        }
+                        else {
+                            UserService.createUser(user)
+                                .then(function (response) {
+                                    var user = response;
+                                    $rootScope.currentUser = user;
+                                    $location.url("/user/" + user._id);
+                                })
+                                .catch(function (error) {
+                                    vm.error = "Unable to register user due to an error: " + error;
+                                });
+                        }
+                    });
+            }
         }
 
     }

@@ -1,0 +1,85 @@
+<h1 class="page-header">Admin</h1>
+<h2 class="sub-header">Manage Users</h2>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr class="theadrow">
+            <th ng-click="model.order('username')" class="nowrap">
+                    <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"
+                          ng-show="(model.predicate == 'username') && (model.reverse == true)"></span>
+                <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"
+                      ng-show="(model.predicate == 'username') && (model.reverse == false)"></span>
+                Username
+            </th>
+            <th>Password</th>
+            <th ng-click="model.order('firstName')" class="nowrap">
+                    <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"
+                          ng-show="(model.predicate == 'firstName') && (model.reverse == true)"></span>
+                <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"
+                      ng-show="(model.predicate == 'firstName') && (model.reverse == false)"></span>
+                First Name
+            </th>
+            <th ng-click="model.order('lastName')" class="nowrap">
+                    <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"
+                          ng-show="(model.predicate == 'lastName') && (model.reverse == true)"></span>
+                <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"
+                      ng-show="(model.predicate == 'lastName') && (model.reverse == false)"></span>
+                Last Name
+            </th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="forms-input-row">
+            <td>
+                <input type="text" class="form-control" id="username" placeholder="username"
+                       ng-model="model.inputUser.username">
+            </td>
+            <td>
+                <input type="password" class="form-control" id="password" placeholder="password"
+                       ng-model="model.inputUser.password">
+            </td>
+            <td>
+                <input type="text" class="form-control" id="firstName" placeholder="First Name"
+                       ng-model="model.inputUser.firstName">
+            </td>
+            <td>
+                <input type="text" class="form-control" id="lastName" placeholder="Last Name"
+                       ng-model="model.inputUser.lastName">
+            </td>
+            <td>
+                <input type="text" class="form-control" id="roles" placeholder="role1,role2"
+                       ng-model="model.inputUser.roles">
+            </td>
+            <td>
+                <a href="" ng-click="model.add(model.inputUser)"
+                   ng-show="model.selected == -1"><span
+                        class="glyphicon glyphicon-plus plusicon pull-left" aria-hidden="true"></span>
+                </a>
+                <a href="" ng-click="model.update(model.inputUser)"
+                   ng-hide="model.selected == -1"><span
+                        class="glyphicon glyphicon-ok okicon pull-right" aria-hidden="true"></span>
+                </a>
+            </td>
+        </tr>
+        <tr ng-repeat="u in model.users | orderBy:model.predicate:model.reverse">
+            <td>{{u.username}}</td>
+            <td>&nbsp;</td>
+            <td>{{u.firstName}}</td>
+            <td>{{u.lastName}}</td>
+            <td>{{u.roles}}</td>
+            <td>
+                <a href="" ng-click="model.remove(u)"><span
+                        class="glyphicon glyphicon-remove removeicon pull-left"
+                        aria-hidden="true"></span>
+                </a>
+                <a href="" ng-click="model.select(u)"><span
+                        class="glyphicon glyphicon-cog pencilicon pull-right" aria-hidden="true"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

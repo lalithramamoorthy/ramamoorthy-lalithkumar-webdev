@@ -1,0 +1,62 @@
+<div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="table" >
+            <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>UserName</th>
+                <th>Password</th>
+                <th>Roles</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="forms-input-row">
+                <td><input type="text" class="form-control" id="username" placeholder="username"
+                           ng-model="model.addUser.username">
+                </td>
+                <td><input type="password" class="form-control" id="password" placeholder="password"
+                           ng-model="model.addUser.password">
+                </td>
+                <td><input type="text" class="form-control" id="firstName" placeholder="First Name"
+                           ng-model="model.addUser.firstName">
+                </td>
+                <td><input type="text" class="form-control" id="lastName" placeholder="Last Name"
+                           ng-model="model.addUser.lastName">
+                </td>
+                <td><input type="text" class="form-control" id="roles" placeholder="role1,role2"
+                           ng-model="model.addUser.roles">
+                </td>
+                <td><a href="" ng-click="model.add(model.addUser)"
+                       ng-show="model.selected == -1"><span
+                            class="glyphicon glyphicon-plus plusicon pull-left" aria-hidden="true"></span>
+                    </a>
+                    <a href="" ng-click="model.update(model.addUser)"
+                       ng-hide="model.selected == -1"><span
+                            class="glyphicon glyphicon-ok okicon pull-right" aria-hidden="true"></span>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-repeat="user in model.users">
+                <td>{{user.username}}</td>
+                <td>&nbsp;</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.roles}}</td>
+                <td>
+                    <a href="" ng-click="model.remove(user)"><span
+                            class="glyphicon glyphicon-remove removeicon pull-left"
+                            aria-hidden="true"></span>
+                    </a>
+                    <a href="" ng-click="model.select(user)"><span
+                            class="glyphicon glyphicon-cog pencilicon pull-right" aria-hidden="true"></span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

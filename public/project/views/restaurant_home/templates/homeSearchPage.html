@@ -1,9 +1,9 @@
 <div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
 <div class="page-background">
     <section id="contact class" class="container-fluid text-center">
-        <div class="container-fluid">
+        <div id="responsiveForm" class="container">
             <div class="row">
-                <div id="responsiveForm">
+                <div>
                     <form class=" form-inline well-searchbox" role="form">
                         <div class=" form-group">
                             <label class="control-label">City</label>
@@ -39,7 +39,7 @@
             <div class="">
                 <div>
                     <a href="#/user/restaurant/{{restaurant.id}}"> <img width="100%" class="img-rounded"
-                                     src=""/></a>
+                                     src="{{restaurant.image_url}}"/></a>
                 </div>
                 <div>{{restaurant.name}}</div>
             </div>

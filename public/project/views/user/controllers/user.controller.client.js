@@ -12,7 +12,22 @@
 
 
         function init() {
-            vm.loggedInUserId = $rootScope.currentUser._id;
+            UserService
+                .getLoggedInUser()
+                .then(function (response) {
+                    var user = response.data;
+                    if (user) {
+                        vm.loggedInUser = user;
+                        vm.loggedInUserId = vm.loggedInUser._id+"";
+                        return UserService.findUserById(vm.loggedInUserId);
+                    }
+                })
+                .then(function (response) {
+                    if (response) {
+                        vm.loggedInUser = response;
+                    }
+                });
+
 
             UserService.findUserById(vm.userid)
                 .then(function (user) {

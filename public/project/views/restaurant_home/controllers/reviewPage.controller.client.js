@@ -12,7 +12,6 @@
         vm.navigateToUserPage = navigateToUserPage;
 
         function init() {
-            console.log("sappu")
             UserService
                 .getLoggedInUser()
                 .then(function (response) {
@@ -20,7 +19,6 @@
                     if (user) {
                         vm.user = user;
                         vm.userid = vm.user._id+"";
-                        console.log("++++++++++++++++++++++++++++"+ user);
                         return UserService.findUserById(vm.userid);
                     }
                 })
@@ -62,7 +60,7 @@
                     .then(function (response) {
                         if (response) {
                             reviews[index].userName = response.firstName;
-                            // reviews[index].imgUrl = response.data.imgUrl;
+                             reviews[index].imgUrl = response.imgUrl;
                         }
                     });
             });

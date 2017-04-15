@@ -27,6 +27,16 @@
     color: #822433;
 }
 
+.profile-image-size {
+    height: 200px !important;
+    width:200px !important;
+}
+
+.profile-small-image-size {
+    height: 60px !important;
+    width: 60px !important;
+}
+
 .white {
     color: #fff !important;
 }
@@ -82,11 +92,12 @@ div.user-menu-container .thumbnail {
 }
 
 #responsiveForm {
-    background-image: url("http://weknowyourdreams.com/images/restaurant/restaurant-05.jpg");
-    /*background-size: 100% 100%;*/
+    background-image: url(http://c.amsterdam/wp-content/uploads/2015/09/restaurant-c-michiel-van-der-eerde-amsterdam-2.jpg);
+    background-size: 100% 100%;
     padding: 80px;
     padding-top: 120px;
     background-size: cover;
+    margin-bottom: 20px;
 }
 
 .page-background {
@@ -112,5 +123,7 @@ div.user-menu-container .thumbnail {
 .navbar>.container-fluid .navbar-brand-centered {
     margin-left: -80px;
 }
+
+
 
 

@@ -19,7 +19,11 @@
             "unFollowUser": unFollowUser,
             "isFollowingAlready": isFollowingAlready,
             "getLoggedInUser": getLoggedInUser,
-            "setCurrentUser": setCurrentUser
+            "setCurrentUser": setCurrentUser,
+            "createAdminUser": createAdminUser,
+            "updateAdminUser": updateAdminUser,
+            "deleteAdminUser": deleteAdminUser,
+            "findAllUsersAdmin": findAllUsersAdmin
         };
         return api;
 
@@ -106,5 +110,22 @@
         function setCurrentUser(user) {
             $rootScope.currentUser = user;
         }
+
+        function createAdminUser(user) {
+            return $http.post('/api/project/admin/user', user);
+        }
+
+        function updateAdminUser(userId, user) {
+            return $http.put('/api/project/admin/user/' + userId, user);
+        }
+
+        function deleteAdminUser(userId) {
+            return $http.delete('/api/project/admin/user/' + userId);
+        }
+
+        function findAllUsersAdmin() {
+            return $http.get("/api/project/admin/user");
+        }
+
     }
 })();
