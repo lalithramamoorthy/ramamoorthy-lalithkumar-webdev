@@ -108,8 +108,6 @@
                         // reviews[index].imgUrl = response.data.imgUrl;
                     }
                 });
-
-
         }
 
         function selectReview(index) {

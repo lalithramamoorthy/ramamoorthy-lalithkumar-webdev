@@ -318,7 +318,6 @@ module.exports = function (app, model) {
     }
 
     function getLoggedInUser(req, res) {
-        console.log("loggedin called");
         var user = req.isAuthenticated()? req.user : null;
         res.send(user);
     }
@@ -439,6 +438,7 @@ module.exports = function (app, model) {
     function updateProfilePicture(req, res) {
         var userId = req.params.id;
         var user = req.body;
+        console.log(user);
         var imageFile = req.file;
         if (imageFile) {
             var destination = imageFile.destination;

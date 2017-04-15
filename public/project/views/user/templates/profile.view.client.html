@@ -21,25 +21,25 @@
     <form action="{{model.updateProfilePicture}}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="username">Username</label>
-            <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
+            <input value="{{model.user.username}}" type="text" name = "username" class="form-control" id="username" placeholder="Username">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input ng-model="model.user.password" type="password" class="form-control" id="password"
-                   placeholder="Username">
+            <input value="{{model.user.password}}" type="password" name = "password" class="form-control" id="password"
+                   placeholder="Password">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input ng-model="model.user.email" type="email" class="form-control" id="email" placeholder="Email">
+            <input value="{{model.user.email}}" type="email" name = "email" class="form-control" id="email" placeholder="Email">
         </div>
         <div class="form-group">
             <label for="first-name">First Name</label>
-            <input ng-model="model.user.firstName" type="text" class="form-control" id="first-name"
+            <input value="{{model.user.firstName}}" name = "firstName" type="text" class="form-control" id="first-name"
                    placeholder="First Name">
         </div>
         <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input ng-model="model.user.lastName" type="text" class="form-control" id="last-name"
+            <input value="{{model.user.lastName}}" name = "lastName" type="text" class="form-control" id="last-name"
                    placeholder="Last Name">
         </div>
         <div class="form-group">
@@ -48,7 +48,7 @@
                    name="profileImg">
         </div>
         <div class="form-group">
-            <button ng-click="model.Update(user)" type="submit"
+            <button type="submit"
                     class="btn btn-success btn-block">Update
             </button>
         </div>
