@@ -40,9 +40,9 @@
 
                             <div >
 
-                                <img ng-show="!review.imgUrl" src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
+                                <img ng-click="model.navigateToUserPage(review.userName)" ng-show="!review.imgUrl" src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
                                      class="profile-small-image-size img-rounded">
-                                <img ng-show="review.imgUrl" ng-src="{{review.imgUrl}}"
+                                <img ng-click="model.navigateToUserPage(review.userName)" ng-show="review.imgUrl" ng-src="{{review.imgUrl}}"
                                      class=" img-rounded">
                                 <div class="review-block-name">
                                     <a ng-show="currentUser" href=""
