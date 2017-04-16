@@ -35,6 +35,8 @@
                     vm.restaurant = response.data;
                 });
 
+
+
             ReviewService.findAllReviewsforRestaurant(vm.restaurantId)
                 .then(function (reviews) {
                     vm.reviews = reviews;
