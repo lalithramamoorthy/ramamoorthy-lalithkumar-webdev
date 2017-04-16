@@ -106,7 +106,7 @@ div.user-menu-container .thumbnail {
 }
 
 #responsiveForm {
-    background-image: url(http://c.amsterdam/wp-content/uploads/2015/09/restaurant-c-michiel-van-der-eerde-amsterdam-2.jpg);
+    background-image: url(http://foodiefinder.com/wp-content/uploads/2016/10/best-food-ever-s01e03-darn-good.jpg);
     background-size: 100% 100%;
     padding: 80px;
     padding-top: 120px;
@@ -136,6 +136,11 @@ div.user-menu-container .thumbnail {
 .navbar>.container .navbar-brand-centered,
 .navbar>.container-fluid .navbar-brand-centered {
     margin-left: -80px;
+}
+
+
+.color-nav {
+    background-color: #CB202D !important;
 }
 
 

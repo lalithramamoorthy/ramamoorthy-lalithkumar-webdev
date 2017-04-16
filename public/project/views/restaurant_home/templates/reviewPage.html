@@ -4,6 +4,11 @@
         <div class="col-xs-12 col-md-4 col-sm-4">
             <img ng-src="{{model.restaurant.image_url}}" class="img-rounded">
         </div>
+        <!--<div class = "custom-margin">-->
+            <!--<a href="#/user/restaurant/{{model.restaurantId}}/articles"-->
+               <!--class="btn-sm btn-success">Restaurant Article-->
+            <!--</a>-->
+        <!--</div>-->
         <div class="col-xs-12 col-md-8 col-sm-4">
             <div class="review-block-description">
                 <p><b class="wb-red ">Name: </b> {{model.restaurant.name}}</p>
@@ -11,6 +16,9 @@
                 <p><b class="wb-red ">City: </b> {{model.restaurant.city}}</p>
                 <p><b class="wb-red ">State: </b> {{model.restaurant.state}} - {{model.restaurant.postal_code}}</p>
                 <p><b class="wb-red ">Phone Number: </b> {{model.restaurant.phone}}</p>
+                <p><b class="wb-red "><a href="#/user/restaurant/{{model.restaurantId}}/articles"
+                                         class="btn-sm btn-success btn-lg">View Restaurant Article
+                </a></p>
             </div>
         </div>
     </div>

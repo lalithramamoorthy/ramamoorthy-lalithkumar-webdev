@@ -115,6 +115,14 @@
                     }
 
                 })
+                .when("/user/restaurant/:rid/articles",{
+                    templateUrl: 'views/restaurant_home/templates/blog.view.client.html',
+                    controller: "BlogController",
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+                })
                 .when("/user/restaurant/:rid",{
                     templateUrl: 'views/restaurant_home/templates/reviewPage.html',
                     controller: "ReviewController",

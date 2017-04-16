@@ -1,7 +1,7 @@
 <div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
 <div class="page-background">
     <section id="contact class" class="container-fluid text-center">
-        <div id="responsiveForm" class="container">
+        <div id="responsiveForm" class="container-fluid">
             <div class="row">
                 <div>
                     <form role="form">
@@ -25,22 +25,21 @@
     </section>
 
 
-    <div class="container">
-        <div ng-repeat="restaurant in model.restaurants" class="col-md-3 col-sm-4 col-xs-12 img-responsive">
+    <div class="container-fluid">
 
-            <div class="">
+        <div ng-repeat="restaurant in model.restaurants" class="col-md-3 col-sm-6 col-xs-12 img-responsive">
 
                 <div>
-                    <a href="#/user/restaurant/{{restaurant.id}}"> <img width="180px" height="180px" class="img-rounded"
-                                     src="{{restaurant.image_url}}"/></a>
+                    <a href="#/user/restaurant/{{restaurant.id}}"> <img class="img-rounded"
+                                     src="{{restaurant.image_url}}" width="200px" height = "200px"/></a>
                 </div>
                 <div><b class="wb-red ">Name:  </b> {{restaurant.name}}</div>
-            </div>
-            <div>
-                <p><b class="wb-red ">Address:  </b>{{restaurant.address}}</p>
-                <p><b class="wb-red ">City:  </b> {{restaurant.city}} - {{restaurant.country}}</p>
-            </div>
+                <div>
+                    <p><b class="wb-red ">Address:  </b>{{restaurant.address}}</p>
+                    <!--<p><b class="wb-red ">City:  </b> {{restaurant.city}} - {{restaurant.country}}</p>-->
+                </div>
+
         </div>
-    </div>
+
 </div>
 </div>

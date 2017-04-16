@@ -18,6 +18,7 @@ module.exports = function (app) {
     var model = require('./model/models.server.js')();
     require("./services/user.service.server")(app, model);
     require("./services/review.service.server")(app, model);
+    require("./services/blog.service.server")(app, model);
     // require("./services/page.service.server")(app, model);
     // require("./services/widget.service.server")(app, model);
 }

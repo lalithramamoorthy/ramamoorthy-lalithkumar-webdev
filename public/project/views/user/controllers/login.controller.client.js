@@ -18,7 +18,6 @@
                 .login(user)
                 .then(
                     function (response) {
-
                         if (response) {
                             var user = response.data;
                             $rootScope.currentUser = user;

@@ -1,0 +1,111 @@
+<div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-4 col-sm-4">
+            <img ng-src="{{model.restaurant.image_url}}" class="img-rounded">
+        </div>
+        <div class="col-xs-12 col-md-8 col-sm-4">
+            <div class="review-block-description">
+                <p><b class="wb-red ">Name: </b> {{model.restaurant.name}}</p>
+                <p><b class="wb-red ">Address: </b> {{model.restaurant.address}}</p>
+                <p><b class="wb-red ">City: </b> {{model.restaurant.city}}</p>
+                <p><b class="wb-red ">State: </b> {{model.restaurant.state}} - {{model.restaurant.postal_code}}</p>
+                <p><b class="wb-red ">Phone Number: </b> {{model.restaurant.phone}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div ng-repeat="blog in model.Blogs" class="row">
+        <hr/>
+        <div class="col-xs-10 col-md-10 col-sm-10">
+
+            <div ng-if="model.selectedIndex === $index">
+                <form>
+                    <div class="form-group">
+                    <textarea class="form-control" rows="3" placeholder="Description.."
+                              ng-model="model.editBlog.description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <!--<div ng-hide="model.selectedIndex === $index">-->
+                <!--<div class="review-block-name">-->
+                    <!--<a ng-show="currentUser" href=""-->
+                       <!--ng-click="model.navigateToUserPage(blog.userName)">{{blog.userName}}</a>-->
+                <!--</div>-->
+
+            <!--</div>-->
+
+        <!--<div class="col-xs-6 col-md-8 col-sm-4">-->
+            <!--<div class="review-block-name">-->
+                <!--<a ng-show="!currentUser" href="">{{blog.userName}}</a>-->
+            <!--</div>-->
+
+            <div ng-hide="model.selectedIndex === $index">
+                <div>
+                    By, <b>{{blog.userName}}</b> on {{blog.dateCreated | date : 'mediumDate'}}<br><br>
+                    {{blog.description}}
+                </div>
+            </div>
+            <div class="btn-group-md">
+                <a href="" class="btn btn-success btn-sm" role="button"
+                   ng-if="model.selectedIndex == $index"
+                   ng-click="model.updateBlog(model.editBlog)">
+                    Update
+                </a>
+                <a href="" class="btn btn-danger btn-sm" role="button"
+                   ng-if="model.selectedIndex == $index"
+                   ng-click="model.cancelBlog()">
+                    Cancel
+                </a>
+            </div>
+            <div>
+                <a href="" class="btn btn-warning btn-sm" role="button"
+                   ng-if="model.selectedIndex !== $index && currentUser._id == blog.userId"
+                   ng-click="model.selectBlog($index)">
+                    Edit
+                </a>
+                <a href="" class="btn btn-danger btn-sm" role="button"
+                   ng-if="model.selectedIndex !== $index && currentUser._id == blog.userId"
+                   ng-click="model.deleteBlog($index)">
+                    Delete
+                </a>
+            </div>
+        </div>
+        <!--</div>-->
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+                <div class="text-left">
+                    <h3>Write An Aritcle</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <textarea ng-model="blog.description" class="form-control" cols="50"
+                                      id="new-review" name="comment"
+                                      placeholder="Enter your review here..." rows="5"></textarea>
+                            <div class="text-right">
+                                <div class="text-right custom-margin">
+                                    <a ng-show="model.user && model.user.roles == 'critic'" class="btn btn-success btn-lg" href=""
+                                       ng-click="model.createBlog(blog)">Submit</a>
+                                </div>
+                                <div class="text-right custom-margin">
+                                    <a  ng-show="model.user && model.user.roles != 'critic'" class="btn btn-warning btn-lg" href="">Critic Only</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

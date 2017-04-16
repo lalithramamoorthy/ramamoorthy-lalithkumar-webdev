@@ -8,9 +8,7 @@
         vm.logout = logout;
 
         function init() {
-            // vm.userid = $routeParams.uid;
-            // console.log(vm.userid);
-            console.log($rootScope.currentUser);
+
         }
 
         init();

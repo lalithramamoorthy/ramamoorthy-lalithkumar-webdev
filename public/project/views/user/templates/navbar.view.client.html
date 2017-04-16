@@ -1,31 +1,31 @@
-<nav class="navbar navbar-default" role="navigation" ng-controller="NavBarController as navBarControllerModel" role="navigation">
+<nav class="navbar navbar-default color-nav" role="navigation" ng-controller="NavBarController as navBarControllerModel" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <div class="navbar-header color-nav">
+            <button type="button" class="navbar-toggle collapsed color-nav" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div class="navbar-brand navbar-brand-centered"><a href="#/user/restaurants">Diner's Hub</a></div>
+            <div class="navbar-brand navbar-brand-centered color-nav"><a class = " white" href="#/user/restaurants">Diner's Hub</a></div>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-brand-centered">
+        <div class="collapse navbar-collapse color-nav" id="navbar-brand-centered">
             <ul class="nav navbar-nav">
-                <li><a href="#/user/restaurants"><b>Restaurants</b></a></li>
+                <li><a href="#/user/restaurants"><b class="white">Restaurants</b></a></li>
                 <!--<li><a href="">Link</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!--<li ng-show="currentUser && currentUser.roles == 'admin'""><a href="">Admin</a></li>-->
-                <li ng-show="currentUser.roles == 'admin'" role="presentation"><a href="#/user/admin">Admin</a></li>
-                <li ng-show="!currentUser" role="presentation"><a href="#/register">Register</a></li>
-                <li ng-show="!currentUser" role="presentation"><a href="#/login">Login</a></li>
+                <li ng-show="currentUser.roles == 'admin'" role="presentation"><a class="white" href="#/user/admin">Admin</a></li>
+                <li ng-show="!currentUser" role="presentation"><a class="white" href="#/register">Register</a></li>
+                <li ng-show="!currentUser" role="presentation"><a class="white" href="#/login">Login</a></li>
                 <li ng-show="currentUser" role="presentation">
-                    <a href="#/profile/{{currentUser._id}}"> {{currentUser.username}}</a></li>
+                    <a href="#/profile/{{currentUser._id}}" class="white"> {{currentUser.username}}</a></li>
                 <li ng-show="currentUser" role="presentation">
-                    <a href="" ng-click="navBarControllerModel.logout()" > Logout</a></li>
+                    <a href="" ng-click="navBarControllerModel.logout()" class="white"> Logout</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
