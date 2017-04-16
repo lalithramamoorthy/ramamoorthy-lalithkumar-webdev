@@ -152,7 +152,7 @@ module.exports = function (app, model) {
             .findUserByUsername(username)
             .then(
                 function (user) {
-                    if (user && (password == user.password)) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     }
                     else {
