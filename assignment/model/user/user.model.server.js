@@ -21,7 +21,7 @@ module.exports = function () {
         var deferred = q.defer();
         userModel.create(user, function (err, doc) {
             if(err){
-                deferred.abort(err);
+                deferred.reject(err);
             }else{
                 deferred.resolve(doc);
             }

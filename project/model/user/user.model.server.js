@@ -27,7 +27,15 @@ module.exports = function () {
     return api;
 
     function findUserByFacebookId(facebookId) {
-        return userModel.findOne({'facebook.id': facebookId});
+        var deferred = q.defer();
+        userModel.findOne({'facebook.id': facebookId}, function(err, user){
+            if(err)
+                deferred.resolve(null);
+            else
+                deferred.resolve(user)
+        } );
+
+        return deferred.promise;
     }
 
     function findUserByGoogleId(googleId) {
@@ -38,7 +46,7 @@ module.exports = function () {
         var deferred = q.defer();
         userModel.create(user, function (err, doc) {
             if(err){
-                deferred.abort(err);
+                deferred.reject(err);
             }else{
                 deferred.resolve(doc);
             }

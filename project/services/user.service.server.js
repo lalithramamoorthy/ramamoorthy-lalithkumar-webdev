@@ -6,16 +6,11 @@ module.exports = function (app, model) {
     var uploadsFolderPath = __dirname + '/../../public/uploads';
     var upload = multer({dest: uploadsFolderPath});
 
-    var userModel = model.userModel;
-    var reviewModel = model.reviewModel;
-    var LocalStrategy = require('passport-local').Strategy;
-    var FacebookStrategy = require('passport-facebook').Strategy;
-    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var facebookConfig = {
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
         callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-        profileFields: ['id', 'name', 'emails']
+        profileFields: ['emails', 'name']
     };
 
     var GoogleConfig = {
@@ -23,12 +18,23 @@ module.exports = function (app, model) {
         clientSecret : process.env.GOOGLE_CLIENT_SECRET,
         callbackURL  : process.env.GOOGLE_CALLBACK_URL
     };
+
+    var userModel = model.userModel;
+    var reviewModel = model.reviewModel;
+    var LocalStrategy = require('passport-local').Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
+    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    var bcrypt = require("bcrypt-nodejs");
+    passport.use('project', new LocalStrategy(projectLocalStrategy));
+    passport.use('Google',new GoogleStrategy(GoogleConfig,GoogleStrategy))
+
+
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+
+
     // var FacebookStrategy = require('passport-facebook-token').Strategy;
 
-    passport.use('project', new LocalStrategy(projectLocalStrategy));
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-    passport.use('Google',new GoogleStrategy(GoogleConfig,GoogleStrategy))
-    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -45,7 +51,7 @@ module.exports = function (app, model) {
     app.put("/api/project/user/:userId", updateUser);
     app.delete("/api/project/user/:userId", deleteUser);
     app.post('/api/project/login', passport.authenticate('project'), login);
-    app.get("/auth/facebook", passport.authenticate('facebook', {scope: ['public_profile', 'email']}));
+    //app.get("/auth/facebook", passport.authenticate('facebook', {scope: ['public_profile', 'email']}));
     app.post('/api/project/logout', logout);
     app.get ('/api/project/loggedin', getLoggedInUser);
     app.get("/api/project/admin/user", auth, findAllUsersAdmin);
@@ -58,14 +64,11 @@ module.exports = function (app, model) {
             successRedirect: "/profile/null",
             failureRedirect: '/'
         }));
-    app.get("/auth/facebook", passport.authenticate('facebook', {scope: 'email'}));
-    app.get("/auth/facebook/callback", passport.authenticate('facebook', {
-            failureRedirect: '/'
-        }),
+    app.get("/auth/facebook", passport.authenticate('facebook'));
+    app.get("/auth/facebook/callback", passport.authenticate('facebook'),
         function (req, res) {
-        console.log(req);
-            var redirectUrl = "/profile/" + req.user._id.toString();
-            res.redirect(redirectUrl);
+            var redirectUrl = "/project/#/profile/" + req.user._id;
+            return res.redirect(redirectUrl);
         });
 
     function GoogleStrategy(token, refreshToken, profile, done){
@@ -106,31 +109,24 @@ module.exports = function (app, model) {
     }
 
     function facebookStrategy(token, refreshToken, profile, done) {
-        console.log(profile);
-        userModel.findUserByFacebookId(profile.id)
+        var profileid = profile.id + "";
+        userModel.findUserByFacebookId(profileid)
             .then(function (user) {
-                if (user) {
-                    console.log(user);
-                    return done(null, user);
-                }
-                else {
-                    var email = profile.emails[0].value;
-                    var emailParts = email.split("@");
+                if (!user) {
                     var newUser = {
                         facebook: {
                             id: profile.id,
                             token: token
                         },
-
-                        username: emailParts[0],
-                        firstName: profile.name.givenName,
-                        lastName: profile.name.familyName,
-                        email: email
+                        username: profile._json.first_name,
+                        firstName: profile._json.first_name,
+                        lastName: profile._json.last_name
                     };
-                    model.createUser(newUser)
+                    userModel.createUser(newUser)
                         .then(function (newUser) {
+
                                 if (newUser) {
-                                    console.log(newUser);
+
                                     return done(null, newUser);
                                 }
                                 else {
@@ -141,17 +137,22 @@ module.exports = function (app, model) {
                                 return done(err);
                             });
                 }
+                else {
+;
+                    return done(null, user);
+                }
+            }, function(err) {
+
             });
     }
 
     function projectLocalStrategy(username, password, done) {
-        console.log(username, password);
+
         userModel
             .findUserByUsername(username)
             .then(
                 function (user) {
-                    console.log(user);
-                    if (user && password == user.password) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     }
                     else {
@@ -188,7 +189,7 @@ module.exports = function (app, model) {
 
         var userId = req.params.userId;
         var newUser = req.body;
-        console.log("++++++++++"+req.body);
+
         userModel.updateUser(userId, newUser)
             .then(function (user) {
                 res.send(user);
@@ -219,7 +220,7 @@ module.exports = function (app, model) {
 
     function findUserByUsername(req, res) {
         var username = req.query.username;
-        console.log("Server"+username);
+
         userModel.findUserByUsername(username)
             .then(function (user) {
                 res.send(user);
@@ -308,10 +309,12 @@ module.exports = function (app, model) {
 
     function createUser(req, res) {
         var newUser = req.body;
+        newUser.password = bcrypt.hashSync(newUser.password);
         userModel.createUser(newUser)
             .then(
                 function(user){
                     if(user){
+                        console.log(user.password);
                         req.login(user, function(err) {
                             if(err) {
                                 res.status(400).send(err);
@@ -465,7 +468,7 @@ module.exports = function (app, model) {
     function updateProfilePicture(req, res) {
         var userId = req.params.id;
         var user = req.body;
-        console.log(user);
+
         var imageFile = req.file;
         if (imageFile) {
             var destination = imageFile.destination;
