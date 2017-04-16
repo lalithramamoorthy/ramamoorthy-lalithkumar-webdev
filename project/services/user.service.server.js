@@ -13,20 +13,20 @@ module.exports = function (app, model) {
         profileFields: ['emails', 'name']
     };
 
-    var GoogleConfig = {
-        clientID     : process.env.GOOGLE_CLIENT_ID,
-        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL  : process.env.GOOGLE_CALLBACK_URL
-    };
+    // var GoogleConfig = {
+    //     clientID     : process.env.GOOGLE_CLIENT_ID,
+    //     clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+    //     callbackURL  : process.env.GOOGLE_CALLBACK_URL
+    // };
 
     var userModel = model.userModel;
     var reviewModel = model.reviewModel;
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
-    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var bcrypt = require("bcrypt-nodejs");
     passport.use('project', new LocalStrategy(projectLocalStrategy));
-    passport.use('Google',new GoogleStrategy(GoogleConfig,GoogleStrategy))
+    // passport.use('Google',new GoogleStrategy(GoogleConfig,GoogleStrategy))
 
 
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
@@ -58,12 +58,12 @@ module.exports = function (app, model) {
     app.post("/api/project/admin/user", auth, createAdminUser);
     app.delete('/api/project/admin/user/:userId', auth, deleteAdminUser);
     app.put('/api/project/admin/user/:userId', auth, updateAdminUser);
-    app.get('/auth/google', passport.authenticate('Google', {scope: ['profile','email']}));
-    app.get('/auth/google/callback',
-        passport.authenticate('Google', {
-            successRedirect: "/profile/null",
-            failureRedirect: '/'
-        }));
+    // app.get('/auth/google', passport.authenticate('Google', {scope: ['profile','email']}));
+    // app.get('/auth/google/callback',
+    //     passport.authenticate('Google', {
+    //         successRedirect: "/profile/null",
+    //         failureRedirect: '/'
+    //     }));
     app.get("/auth/facebook", passport.authenticate('facebook'));
     app.get("/auth/facebook/callback", passport.authenticate('facebook'),
         function (req, res) {
@@ -71,42 +71,42 @@ module.exports = function (app, model) {
             return res.redirect(redirectUrl);
         });
 
-    function GoogleStrategy(token, refreshToken, profile, done){
-        userModel
-            .findUserByGoogleId(profile.id)
-            .then(
-                function(user) {
-                    if(user) {
-                        return done(null, user);
-                    } else {
-                        var email = profile.emails[0].value;
-                        var emailParts = email.split("@");
-                        var newGoogleUser = {
-                            username:  emailParts[0],
-                            firstName: profile.name.givenName,
-                            lastName:  profile.name.familyName,
-                            email:     email,
-                            google: {
-                                id:    profile.id,
-                                token: token
-                            }
-                        };
-                        return userModel.createUser(newGoogleUser);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            )
-            .then(
-                function(user){
-                    return done(null, user);
-                },
-                function(err){
-                    if (err) { return done(err); }
-                }
-            );
-    }
+    // function GoogleStrategy(token, refreshToken, profile, done){
+    //     userModel
+    //         .findUserByGoogleId(profile.id)
+    //         .then(
+    //             function(user) {
+    //                 if(user) {
+    //                     return done(null, user);
+    //                 } else {
+    //                     var email = profile.emails[0].value;
+    //                     var emailParts = email.split("@");
+    //                     var newGoogleUser = {
+    //                         username:  emailParts[0],
+    //                         firstName: profile.name.givenName,
+    //                         lastName:  profile.name.familyName,
+    //                         email:     email,
+    //                         google: {
+    //                             id:    profile.id,
+    //                             token: token
+    //                         }
+    //                     };
+    //                     return userModel.createUser(newGoogleUser);
+    //                 }
+    //             },
+    //             function(err) {
+    //                 if (err) { return done(err); }
+    //             }
+    //         )
+    //         .then(
+    //             function(user){
+    //                 return done(null, user);
+    //             },
+    //             function(err){
+    //                 if (err) { return done(err); }
+    //             }
+    //         );
+    // }
 
     function facebookStrategy(token, refreshToken, profile, done) {
         var profileid = profile.id + "";
@@ -152,7 +152,7 @@ module.exports = function (app, model) {
             .findUserByUsername(username)
             .then(
                 function (user) {
-                    if (user && bcrypt.compareSync(password, user.password)) {
+                    if (user && (password == user.password)) {
                         return done(null, user);
                     }
                     else {
