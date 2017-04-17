@@ -143,6 +143,23 @@ div.user-menu-container .thumbnail {
     background-color: #CB202D !important;
 }
 
+.g-item{
+    width: 250px;
+    height: 250px;
+    background-position: center;
+    background-size: cover;
+
+}
+
+.my-image {
+    width: 300px !important;
+    height: 200px !important;
+}
+.image-items {
+    display: block;
+    margin: auto;
+}
+
 
 
 

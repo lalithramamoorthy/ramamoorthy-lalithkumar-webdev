@@ -19,9 +19,13 @@
                 .then(
                     function (response) {
                         if (response) {
-                            var user = response.data;
-                            $rootScope.currentUser = user;
-                            $location.url("/profile/"+user._id);
+                            if(response.data == "true") {
+                                vm.error = "User not found";
+                            } else {
+                                var user = response.data;
+                                $rootScope.currentUser = user;
+                                $location.url("/profile/" + user._id);
+                            }
                         } else {
                             vm.error = "User not found";
                         }

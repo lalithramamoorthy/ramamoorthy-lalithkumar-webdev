@@ -1,5 +1,5 @@
 <div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <!--<div class="col-xs-12 col-md-4  col-sm-4">-->
         <!--<img style="width: auto" ng-src="{{model.restaurant.image_url}}" class="img-rounded">-->
@@ -12,25 +12,45 @@
         <!--</div>-->
         <div class="col-xs-12 col-md-12 col-sm-12">
             <div class="review-block-description">
-                <ng-map center="[{{model.restaurant.lat}}, {{model.restaurant.lng}}]"></ng-map>
+                <ng-map zoom="18" center="[{{model.restaurant.lat}}, {{model.restaurant.lng}}]"
+                default-style="false"
+                map-type-id="MapTypeId.SATELLITE" tilt="45"">
+                    <street-view-panorama container="streetview">
+                    </street-view-panorama>
+
+                </ng-map>
             </div>
         </div>
     </div>
 </div>
 
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-4 col-sm-4 custom-margin">
-            <hr>
-            <img style="width: auto" ng-src="{{model.restaurant.image_url}}" class="img-rounded">
-            <p><b class="wb-red ">Name: </b> {{model.restaurant.name}}</p>
-            <p><b class="wb-red ">Address: </b> {{model.restaurant.address}}</p>
-            <p><b class="wb-red ">Phone Number: </b> {{model.restaurant.phone}}</p>
-            <p><b class="wb-red "><a href="#/user/restaurant/{{model.restaurantId}}/articles"
-                                     class="btn-sm btn-success btn-lg">View Restaurant Article
-            </a></b></p>
+        <div class="col-md-3 col-sm-4 custom-margin">
+            <div class="thumbnail">
+                <img class="my-image" src="{{model.restaurant.image_url}}" alt="">
+                <div class="caption">
+                    <h3>Details</h3>
+                    <p><b class="wb-red ">Name: </b> {{model.restaurant.name}}</p>
+                    <p><b class="wb-red ">Address: </b> {{model.restaurant.address}}</p>
+                    <p><b class="wb-red ">Phone Number: </b> {{model.restaurant.phone}}</p>
+                    <p><a href="#/user/restaurant/{{model.restaurantId}}/articles" class="btn btn-default" role="button">Articles</a></p>
+                </div>
+            </div>
         </div>
+
+
+        <!--<div class="col-md-4 col-sm-4 custom-margin">-->
+           <!--<div class="g-item" style="background-image:url({{model.restaurant.image_url}});">-->
+        <!--</div>-->
+            <!--<p><b class="wb-red ">Name: </b> {{model.restaurant.name}}</p>-->
+            <!--<p><b class="wb-red ">Address: </b> {{model.restaurant.address}}</p>-->
+            <!--<p><b class="wb-red ">Phone Number: </b> {{model.restaurant.phone}}</p>-->
+            <!--<p><b class="wb-red "><a href="#/user/restaurant/{{model.restaurantId}}/articles"-->
+                                     <!--class="btn-sm btn-success btn-lg">View Restaurant Article-->
+            <!--</a></b></p>-->
+        <!--</div>-->
         <div class="col-md-8 col-sm-8">
 
                 <div class="custom-margin">
@@ -43,7 +63,7 @@
                                 <img ng-click="model.navigateToUserPage(review.userName)" ng-show="!review.imgUrl" src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
                                      class="profile-small-image-size img-rounded">
                                 <img ng-click="model.navigateToUserPage(review.userName)" ng-show="review.imgUrl" ng-src="{{review.imgUrl}}"
-                                     class=" img-rounded">
+                                     class="profile-small-image-size img-rounded">
                                 <div class="review-block-name">
                                     <a ng-show="currentUser" href=""
                                        ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
@@ -54,7 +74,7 @@
                                 <div class="review-block-date">{{review.dateCreated | date : 'mediumDate'}}<br/></div>
                             </div>
                         </div>
-                        <div class="col-xs-6 col-md-8 col-sm-4">
+                        <div class="col-xs-6 col-md-8 col-sm-8">
                             <div ng-if="model.selectedIndex === $index">
                                 <form>
                                     <div class="form-group">
@@ -64,13 +84,12 @@
                                 </form>
                             </div>
                             <div ng-hide="model.selectedIndex === $index">
-
-                                <div>
-                                    <p ng-if="review.roles == 'critic'"><img class="critic-image"
-                                                                             src="../../../../images/critic.png"/> <b
-                                            class="critic">Critic's Review - </b></p>
+                                <!--<div>-->
+                                    <!--<p ng-if="review.roles == 'critic'"><img class="critic-image"-->
+                                                                             <!--src="../../../../images/critic.png"/> <b-->
+                                            <!--class="critic">Critic's Review - </b></p>-->
                                     {{review.description}}
-                                </div>
+                                <!--</div>-->
                             </div>
                             <div class="btn-group-md">
                                 <a href="" class="btn btn-success btn-sm" role="button"

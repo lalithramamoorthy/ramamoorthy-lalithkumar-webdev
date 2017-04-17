@@ -156,7 +156,7 @@ module.exports = function (app, model) {
                         return done(null, user);
                     }
                     else {
-                        return done(null, false);
+                        return done(null, true);
                     }
                 },
                 function (err) {
@@ -314,7 +314,6 @@ module.exports = function (app, model) {
             .then(
                 function(user){
                     if(user){
-                        console.log(user.password);
                         req.login(user, function(err) {
                             if(err) {
                                 res.status(400).send(err);
