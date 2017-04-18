@@ -131,6 +131,14 @@
                         getLoggedIn: getLoggedIn
                     }
                 })
+                .when("/user/search/restaurants/:sid",{
+                    templateUrl: 'views/restaurant_home/templates/home.search.client.html',
+                    controller: "HomeController",
+                    controllerAs: "model",
+                    resolve: {
+                        getLoggedIn: getLoggedIn
+                    }
+                })
                 .when("/user/restaurants",{
                     templateUrl: 'views/restaurant_home/templates/homeSearchPage.html',
                     controller: "HomeSearchController",
