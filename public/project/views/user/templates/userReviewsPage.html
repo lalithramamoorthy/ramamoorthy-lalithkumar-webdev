@@ -1,60 +1,130 @@
 <div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-md-4 col-sm-4">
-            <img class="thumbnail profile-image-size"
-                 src="../../images/default.png" alt="" ng-show="!model.user.imgUrl">
-            <img  class="thumbnail profile-image-size img-rounded"
-                  ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
-            <div class = "custom-margin" ng-show="currentUser._id != model.userid">
-                <a href=""
-                   ng-click="model.followUser()"
-                   ng-hide="model.isFollowingAlready"
-                   class="btn-sm btn-success">Follow
-                </a>
-                <a href=""
-                   ng-click="model.unFollowUser()"
-                   ng-show="model.isFollowingAlready"
-                   class="btn-sm btn-danger">Unfollow
-                </a>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-8 col-sm-4">
-            <div class="review-block-description">
-                <p><b class="wb-red ">FirstName:  </b> {{model.user.firstName}}</p>
-                <p><b class="wb-red ">LastName:  </b> {{model.user.lastName}}</p>
-                <p><b class="wb-red ">Role:  </b> {{model.user.roles}}</p>
-                <p><b class="wb-red ">Followers:  </b> {{model.user.followers.length}}</p>
-                <p><b class="wb-red ">Following:  </b> {{model.user.following.length}}</p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-7">
-
-                <div ng-repeat="review in model.reviews" class="row">
-                    <hr/>
-                    <div class="col-xs-6 col-sm-6 col-md-6">
-                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
-                             alt="" ng-show="!model.user.imgUrl">
-                        <img  class=" profile-small-image-size img-rounded"
-                              ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
-                        <div class="review-block-name"><a href="" ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
-                        </div>
-                        <div class="review-block-date">{{review.dateCreated | date : 'mediumDate'}}<br/></div>
+        <div class="col-md-3 col-sm-4 col-xs-12 custom-margin">
+            <div class="thumbnail">
+                <img src="../../images/default.png" alt="" ng-show="!model.user.imgUrl">
+                <img class="img-rounded"
+                     ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
+                <div class="caption">
+                    <p><b class="wb-red ">FirstName: </b> {{model.user.firstName}}</p>
+                    <p><b class="wb-red ">LastName: </b> {{model.user.lastName}}</p>
+                    <p><b class="wb-red ">Followers: </b> {{model.user.followers.length}}</p>
+                    <p><b class="wb-red ">Following: </b> {{model.user.following.length}}</p>
+                    <div class="custom-margin" ng-show="currentUser._id != model.userid">
+                        <a href=""
+                           ng-click="model.followUser()"
+                           ng-hide="model.isFollowingAlready"
+                           class="btn-sm btn-success">Follow
+                        </a>
+                        <a href=""
+                           ng-click="model.unFollowUser()"
+                           ng-show="model.isFollowingAlready"
+                           class="btn-sm btn-danger">Unfollow
+                        </a>
                     </div>
-
-                    <div>{{review.description}}</div>
-                    <!--<div class="review-block-description">this was nice in buy. this was nice in buy. this was nice-->
-                    <!--in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy-->
-                    <!--this was nice in buy-->
-                    <!--</div>-->
-
                 </div>
+            </div>
         </div>
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div id="exTab2">
+                <ul class="nav nav-pills">
+                    <li role="presentation" class="nav active">
+                        <a href="" data-target="#rev" data-toggle="tab">Reviews</a>
+                    </li>
+                    <li role="presentation" class="nav"><a href="" data-target="#art" data-toggle="tab">Articles</a>
+                    </li>
+                    <li role="presentation" class="nav"><a href="" data-target="#followers"
+                                                           data-toggle="tab">Followers</a>
+                    </li>
+                    <li role="presentation" class="nav"><a href="" data-target="#following"
+                                                           data-toggle="tab">Following</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="rev">
+                                <div ng-repeat="review in model.reviews" class="row">
+                                    <hr/>
+                                        <div class="col-sm-4 col-md-4">
+                                            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
+                                                 alt="" ng-show="!model.user.imgUrl">
+                                            <img class=" profile-small-image-size img-rounded"
+                                                 ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
+                                            <div class="review-block-name"><a href=""
+                                                                              ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
+                                            </div>
+                                            <div class="review-block-date">{{review.dateCreated | date :
+                                                'mediumDate'}}<br/></div>
+                                        </div>
+                                        <div class="col-sm-8 col-md-8">{{review.description}}</div>
+                                </div>
+                    </div>
+                    <div class="tab-pane" id="art">
+                            <div ng-repeat="blog in model.blogs" class="row">
+                                <hr/>
+                                <div class="col-xs-12 col-md-12 col-sm-12">
+                                    <div>
+                                        By, <b>{{blog.userName}}</b> on {{blog.dateCreated | date :
+                                        'mediumDate'}}<br><br>
+                                        {{blog.description}}
+                                    </div>
+                                </div>
+                                <!--</div>-->
+                            </div>
+
+                    </div>
+                    <div class="tab-pane" id="followers">
+
+                                    <div ng-repeat="user in model.followedusers" class="row">
+                                        <hr/>
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
+                                                 alt="" ng-show="!user.imgUrl">
+                                            <img class=" profile-small-image-size img-rounded"
+                                                 ng-show="user.imgUrl" ng-src="{{user.imgUrl}}">
+                                        </div>
+                                        <h4 class="col-xs-6 col-sm-6 col-md-6">
+                                            <a href=""
+                                               ng-click="model.navigateToUserPage(user.username)">
+                                                {{user.firstName}}
+                                                {{user. lastName}}
+                                            </a>
+                                        </h4>
+                                    </div>
+
+                    </div>
+                    <div class="tab-pane" id="following">
+
+                                    <div ng-repeat="user in model.followingusers" class="row">
+                                        <hr/>
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
+                                                 alt="" ng-show="!user.imgUrl">
+                                            <img class=" profile-small-image-size img-rounded"
+                                                 ng-show="user.imgUrl" ng-src="{{user.imgUrl}}">
+
+                                        </div>
+                                        <h4 class="col-xs-6 col-sm-6 col-md-6">
+                                            <a href=""
+                                               ng-click="model.navigateToUserPage(user.username)">
+                                                {{user.firstName}}
+                                                {{user. lastName}}
+                                            </a>
+                                        </h4>
+                                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+
+
+
+
+
 

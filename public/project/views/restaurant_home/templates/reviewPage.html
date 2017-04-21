@@ -1,15 +1,6 @@
 <div ng-include src="'views/user/templates/navbar.view.client.html'"></div>
 <div class="container">
     <div class="row">
-        <!--<div class="col-xs-12 col-md-4  col-sm-4">-->
-        <!--<img style="width: auto" ng-src="{{model.restaurant.image_url}}" class="img-rounded">-->
-        <!--<p><b class="wb-red ">Name: </b> {{model.restaurant.name}}</p>-->
-        <!--<p><b class="wb-red ">Address: </b> {{model.restaurant.address}}</p>-->
-        <!--<p><b class="wb-red ">Phone Number: </b> {{model.restaurant.phone}}</p>-->
-        <!--<p><b class="wb-red "><a href="#/user/restaurant/{{model.restaurantId}}/articles"-->
-        <!--class="btn-sm btn-success btn-lg">View Restaurant Article-->
-        <!--</a></b></p>-->
-        <!--</div>-->
         <div class="col-xs-12 col-md-12 col-sm-12">
             <div class="review-block-description">
                 <ng-map zoom="18" center="[{{model.restaurant.lat}}, {{model.restaurant.lng}}]"
@@ -35,25 +26,13 @@
                     <p><b class="wb-red ">Name: </b> {{model.restaurant.name}}</p>
                     <p><b class="wb-red ">Address: </b> {{model.restaurant.address}}</p>
                     <p><b class="wb-red ">Phone Number: </b> {{model.restaurant.phone}}</p>
-                    <p><a href="#/user/restaurant/{{model.restaurantId}}/articles" class="btn btn-default" role="button">Articles</a></p>
+                    <p><a href="#/user/restaurant/{{model.restaurantId}}/articles" class="btn btn-danger" role="button">Articles</a></p>
                 </div>
             </div>
         </div>
-
-
-        <!--<div class="col-md-4 col-sm-4 custom-margin">-->
-           <!--<div class="g-item" style="background-image:url({{model.restaurant.image_url}});">-->
-        <!--</div>-->
-            <!--<p><b class="wb-red ">Name: </b> {{model.restaurant.name}}</p>-->
-            <!--<p><b class="wb-red ">Address: </b> {{model.restaurant.address}}</p>-->
-            <!--<p><b class="wb-red ">Phone Number: </b> {{model.restaurant.phone}}</p>-->
-            <!--<p><b class="wb-red "><a href="#/user/restaurant/{{model.restaurantId}}/articles"-->
-                                     <!--class="btn-sm btn-success btn-lg">View Restaurant Article-->
-            <!--</a></b></p>-->
-        <!--</div>-->
         <div class="col-md-8 col-sm-8">
 
-                <div class="custom-margin">
+                <div >
                     <div ng-repeat="review in model.reviews" class="row">
                         <hr/>
                         <div class="col-xs-6 col-md-4 col-sm-4">
@@ -84,12 +63,7 @@
                                 </form>
                             </div>
                             <div ng-hide="model.selectedIndex === $index">
-                                <!--<div>-->
-                                    <!--<p ng-if="review.roles == 'critic'"><img class="critic-image"-->
-                                                                             <!--src="../../../../images/critic.png"/> <b-->
-                                            <!--class="critic">Critic's Review - </b></p>-->
                                     {{review.description}}
-                                <!--</div>-->
                             </div>
                             <div class="btn-group-md">
                                 <a href="" class="btn btn-success btn-sm" role="button"

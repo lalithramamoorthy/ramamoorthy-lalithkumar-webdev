@@ -35,7 +35,7 @@
                         <h3>Details</h3>
                         <p><b class="wb-red ">Name: </b>{{restaurant.name | limitTo:20}}{{restaurant.name.length > 20 ? "..." : ""}}</p>
                         <p><b class="wb-red ">Address: </b>{{restaurant.address | limitTo:15}}{{restaurant.address.length > 15 ? "..." : ""}}</p>
-                        <p><a href="#/user/restaurant/{{restaurant.id}}" class="btn btn-primary" role="button">Reviews</a>
+                        <p><a href="#/user/restaurant/{{restaurant.id}}" class="btn btn-danger" role="button">Reviews</a>
                             <a href="#/user/restaurant/{{restaurant.id}}/articles" class="btn btn-default" role="button">Articles</a></p>
                     </div>
                 </div>

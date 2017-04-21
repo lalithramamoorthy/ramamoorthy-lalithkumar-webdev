@@ -3,13 +3,12 @@
         .module("WebAppMaker")
         .controller("UserController", userController);
 
-    function userController($routeParams, UserService, ReviewService,  $location, $rootScope) {
+    function userController($routeParams, UserService, ReviewService,  $location, $rootScope, BlogService) {
         var vm = this;
         vm.userid = $routeParams.uid;
         vm.followUser = followUser;
         vm.unFollowUser = unFollowUser;
-
-
+        vm.navigateToUserPage = navigateToUserPage;
 
         function init() {
             UserService
@@ -28,7 +27,6 @@
                     }
                 });
 
-
             UserService.findUserById(vm.userid)
                 .then(function (user) {
                     vm.user = user;
@@ -40,8 +38,29 @@
                     vm.reviews = reviews;
                 });
 
+            BlogService.findBlogsByUserId(vm.userid)
+                .then(function (blogs) {
+                    vm.blogs = blogs;
+                });
 
+
+                UserService.getAllFollowers(vm.userid)
+                .then(function (response) {
+                    var users = response.data;
+                    if (users) {
+                        vm.followedusers = users;
+                    }
+                });
+
+            UserService.getAllFollowing(vm.userid)
+                .then(function (response) {
+                    var users = response.data;
+                    if (users) {
+                        vm.followingusers = users;
+                    }
+                });
         }
+
         init();
 
         function followUser() {
@@ -79,6 +98,16 @@
                     }
                     else {
                         vm.isFollowingAlready = false;
+                    }
+                });
+        }
+
+        function navigateToUserPage(username) {
+            UserService.findUserByFirstName(username)
+                .then(function (response) {
+                    if (response) {
+                        $location.url("/user/profile/reviews/"+response._id );
+                        // reviews[index].imgUrl = response.data.imgUrl;
                     }
                 });
         }

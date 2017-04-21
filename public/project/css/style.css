@@ -160,6 +160,21 @@ div.user-menu-container .thumbnail {
     margin: auto;
 }
 
+.dppic {
+    max-height: 300px!important;
+    max-width: 300px!important;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus {
+    color: white;
+    background-color: #CB202D!important;
+}
+
+.nav-pills > li.active > a:hover {
+    background-color: #CB202D!important;
+    color:white;
+}
+
 
 
 

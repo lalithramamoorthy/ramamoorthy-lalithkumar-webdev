@@ -40,6 +40,8 @@ module.exports = function (app, model) {
 
     app.get("/api/project/user", findUser);
     app.post("/api/project/user", createUser);
+    app.get("/api/project/following/user/:userId", getAllFollowing);
+    app.get("/api/project/followers/user/:userId", getAllFollowers);
     app.post("/api/project/user/:id", upload.single('profileImg'), updateProfilePicture);
     app.put("/api/project/user/:loggedInUser/following/:userid", followUser);
     app.put("/api/project/user/:loggedInUser/unfollows/:userid", unFollowUser);
@@ -184,6 +186,50 @@ module.exports = function (app, model) {
                 }
             );
     }
+
+    function getAllFollowers(req, res) {
+        var userid = req.params.userId;
+        userModel
+            .findUserById(userid)
+            .then(
+                function (user) {
+                    return userModel.getAllFollowers(user.followers);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (users) {
+                    res.json(users);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+    function getAllFollowing(req, res) {
+        var userid = req.params.userId;
+        userModel
+            .findUserById(userid)
+            .then(
+                function (user) {
+                    return userModel.getAllFollowing(user.following);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (users) {
+                    res.json(users);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
 
     function updateUser(req, res) {
 
@@ -338,7 +384,6 @@ module.exports = function (app, model) {
 
     function login(req, res) {
         var user = req.user;
-        console.log(user);
         res.json(user);
     }
 

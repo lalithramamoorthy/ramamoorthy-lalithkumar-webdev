@@ -23,13 +23,23 @@
             "createAdminUser": createAdminUser,
             "updateAdminUser": updateAdminUser,
             "deleteAdminUser": deleteAdminUser,
-            "findAllUsersAdmin": findAllUsersAdmin
+            "findAllUsersAdmin": findAllUsersAdmin,
+            "getAllFollowers": getAllFollowers,
+            "getAllFollowing":getAllFollowing
         };
         return api;
 
         function followUser(userId, loggedInUserId) {
             return  $http.put("/api/project/user/" + loggedInUserId + "/following/" + userId);
 
+        }
+
+        function getAllFollowers(userId) {
+            return $http.get("/api/project/followers/user/"+userId);
+        }
+
+        function getAllFollowing(userId) {
+            return $http.get("/api/project/following/user/"+userId);
         }
 
         function unFollowUser(userId, loggedInUserId) {
@@ -103,7 +113,6 @@
         // }
 
         function getLoggedInUser() {
-            console.log("client getLoggedIn");
             return $http.get("/api/project/loggedin");
         }
 

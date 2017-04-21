@@ -169,27 +169,3 @@
         }
 
     })();
-
-angular.module("WebAppMaker").run(["$rootScope", function ($rootScope) {
-    $rootScope.$on('$routeChangeError', function(event, current, previous, rejection) {
-        console.log("error");
-        console.log(event, current, previous, rejection);
-        // if(rejection === coachAppConfig.errorCode.loginRequired){
-        //     window.location.hash="#" + coachAppConfig.paths.login;
-        // }
-    });
-    $rootScope.$on('$routeChangeSuccess', function(event, current, previous, rejection) {
-        console.log("Success");
-        console.log(event, current, previous, rejection);
-        // if(rejection === coachAppConfig.errorCode.loginRequired){
-        //     window.location.hash="#" + coachAppConfig.paths.login;
-        // }
-    });
-    $rootScope.$on('$routeChangeStart', function(event, current, previous, rejection) {
-        console.log("Start");
-        console.log(event, current, previous, rejection);
-        // if(rejection === coachAppConfig.errorCode.loginRequired){
-        //     window.location.hash="#" + coachAppConfig.paths.login;
-        // }
-    });
-}]);

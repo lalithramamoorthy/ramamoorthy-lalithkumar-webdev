@@ -22,9 +22,20 @@ module.exports = function () {
         following: following,
         isFollowingAlready: isFollowingAlready,
         removeFollowing: removeFollowing,
-        removeFollowers: removeFollowers
+        removeFollowers: removeFollowers,
+        getAllFollowers: getAllFollowers,
+        getAllFollowing: getAllFollowing
+
     };
     return api;
+
+    function getAllFollowers(userIds) {
+        return userModel.find({_id: {$in: userIds}});
+    }
+
+    function getAllFollowing(userIds) {
+        return userModel.find({_id: {$in: userIds}});
+    }
 
     function findUserByFacebookId(facebookId) {
         var deferred = q.defer();
