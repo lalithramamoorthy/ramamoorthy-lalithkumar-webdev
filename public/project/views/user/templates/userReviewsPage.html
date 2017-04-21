@@ -8,11 +8,7 @@
                 <img class="img-rounded"
                      ng-show="model.user.imgUrl" ng-src="{{model.user.imgUrl}}">
                 <div class="caption">
-                    <p><b class="wb-red ">FirstName: </b> {{model.user.firstName}}</p>
-                    <p><b class="wb-red ">LastName: </b> {{model.user.lastName}}</p>
-                    <p><b class="wb-red ">Followers: </b> {{model.user.followers.length}}</p>
-                    <p><b class="wb-red ">Following: </b> {{model.user.following.length}}</p>
-                    <div class="custom-margin" ng-show="currentUser._id != model.userid">
+                    <div class="custom-margin text-center" ng-show="currentUser._id != model.userid">
                         <a href=""
                            ng-click="model.followUser()"
                            ng-hide="model.isFollowingAlready"
@@ -24,6 +20,15 @@
                            class="btn-sm btn-danger">Unfollow
                         </a>
                     </div>
+                    <div class="custom-margin text-center" ng-show="currentUser._id == model.userid">
+                        <a href="#/profile/{{currentUser._id}}"
+                           class="btn-sm btn-danger">Edit Profile
+                        </a>
+                    </div><br>
+                    <p><b class="wb-red ">FirstName: </b> {{model.user.firstName}}</p>
+                    <p><b class="wb-red ">LastName: </b> {{model.user.lastName}}</p>
+                    <p><b class="wb-red ">Followers: </b> {{model.user.followers.length}}</p>
+                    <p><b class="wb-red ">Following: </b> {{model.user.following.length}}</p>
                 </div>
             </div>
         </div>

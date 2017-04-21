@@ -27,14 +27,7 @@ module.exports = function (app, model) {
     var bcrypt = require("bcrypt-nodejs");
     passport.use('project', new LocalStrategy(projectLocalStrategy));
     // passport.use('Google',new GoogleStrategy(GoogleConfig,GoogleStrategy))
-
-
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-
-
-
-    // var FacebookStrategy = require('passport-facebook-token').Strategy;
-
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -53,7 +46,6 @@ module.exports = function (app, model) {
     app.put("/api/project/user/:userId", updateUser);
     app.delete("/api/project/user/:userId", deleteUser);
     app.post('/api/project/login', passport.authenticate('project'), login);
-    //app.get("/auth/facebook", passport.authenticate('facebook', {scope: ['public_profile', 'email']}));
     app.post('/api/project/logout', logout);
     app.get ('/api/project/loggedin', getLoggedInUser);
     app.get("/api/project/admin/user", auth, findAllUsersAdmin);

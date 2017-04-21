@@ -23,7 +23,7 @@
                 <li ng-show="!currentUser" role="presentation"><a class="white" href="#/register">Register</a></li>
                 <li ng-show="!currentUser" role="presentation"><a class="white" href="#/login">Login</a></li>
                 <li ng-show="currentUser" role="presentation">
-                    <a href="#/profile/{{currentUser._id}}" class="white"> {{currentUser.username}}</a></li>
+                    <a href="#/user/profile/reviews/{{currentUser._id}}" class="white"> {{currentUser.username}}</a></li>
                 <li ng-show="currentUser" role="presentation">
                     <a href="" ng-click="navBarControllerModel.logout()" class="white"> Logout</a></li>
             </ul>

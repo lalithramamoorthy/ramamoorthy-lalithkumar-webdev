@@ -40,11 +40,13 @@
                                 <img ng-click="model.navigateToUserPage(review.userName)" ng-show="review.imgUrl" ng-src="{{review.imgUrl}}"
                                      class="profile-small-image-size img-rounded">
                                 <div class="review-block-name">
-                                    <a ng-show="currentUser" href=""
+                                    <a href=""  ng-show="currentUser"
                                        ng-click="model.navigateToUserPage(review.userName)">{{review.userName}}</a>
                                 </div>
                                 <div class="review-block-name">
-                                    <a ng-show="!currentUser" href="">{{review.userName}}</a>
+                                    <a href=""  ng-show="!currentUser" data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Please login to view user profile">{{review.userName}}</a>
                                 </div>
                                 <div class="review-block-date">{{review.dateCreated | date : 'mediumDate'}}<br/></div>
                             </div>

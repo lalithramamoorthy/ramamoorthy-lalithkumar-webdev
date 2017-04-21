@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-sm-6 col-md-3" ng-repeat="restaurant in model.restaurants">
                 <div class="thumbnail">
-                    <img class="my-image" src="{{restaurant.image_url}}" alt="">
+                    <img ng-if="restaurant.image_url" class="my-image" src="{{restaurant.image_url}}" alt="">
                     <div class="caption">
                         <h3>Details</h3>
                         <p><b class="wb-red ">Name: </b>{{restaurant.name | limitTo:20}}{{restaurant.name.length > 20 ? "..." : ""}}</p>

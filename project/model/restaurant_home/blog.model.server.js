@@ -9,15 +9,10 @@ module.exports = function () {
         createBlog: createBlog,
         findAllBlogsforRestaurant: findAllBlogsforRestaurant,
         findBlogsByUserId: findBlogsByUserId,
-        // BlogModelDependency: BlogModelDependency,
         updateBlog: updateBlog,
         deleteBlog: deleteBlog
     };
     return api;
-
-    // function BlogModelDependency(model) {
-    //     userModel = model;
-    // }
 
     function createBlog(userId, restaurantId, Blog) {
         Blog.userId = userId;
