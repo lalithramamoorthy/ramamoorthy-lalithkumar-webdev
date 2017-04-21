@@ -3,12 +3,8 @@
     <div class="row">
         <div class="col-xs-12 col-md-12 col-sm-12">
             <div class="review-block-description">
-                <ng-map zoom="18" center="[{{model.restaurant.lat}}, {{model.restaurant.lng}}]"
-                default-style="false"
-                map-type-id="MapTypeId.SATELLITE" tilt="45"">
-                    <street-view-panorama container="streetview">
-                    </street-view-panorama>
-
+                <ng-map center="[{{model.restaurant.lat}}, {{model.restaurant.lng}}]">
+                    <marker position="{{model.restaurant.lat}}, {{model.restaurant.lng}}" title="Hello World!"></marker>
                 </ng-map>
             </div>
         </div>
@@ -39,7 +35,7 @@
 
                             <div >
 
-                                <img ng-click="model.navigateToUserPage(review.userName)" ng-show="!review.imgUrl" src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
+                                <img ng-click="model.navigateToUserPage(review.userName)" ng-show="!review.imgUrl" src="https://dummyimage.com/60x60/666/ffffff&text=No+Image"
                                      class="profile-small-image-size img-rounded">
                                 <img ng-click="model.navigateToUserPage(review.userName)" ng-show="review.imgUrl" ng-src="{{review.imgUrl}}"
                                      class="profile-small-image-size img-rounded">

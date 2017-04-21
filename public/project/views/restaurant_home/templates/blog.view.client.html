@@ -3,7 +3,9 @@
     <div class="row">
         <div>
             <div class="review-block-description">
-                <ng-map center="[{{model.restaurant.lat}}, {{model.restaurant.lng}}]"></ng-map>
+                <ng-map center="[{{model.restaurant.lat}}, {{model.restaurant.lng}}]">
+                    <marker position="{{model.restaurant.lat}}, {{model.restaurant.lng}}" title="Hello World!"></marker>
+                </ng-map>
             </div>
         </div>
         <!--<div class="col-xs-12 col-md-4 col-sm-4">-->
