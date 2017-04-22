@@ -15,6 +15,10 @@ module.exports = function () {
             id:    String,
             token: String
         },
+        google: {
+            id:    String,
+            token: String
+        },
         type: {type: String, default: "restaurant"},
         roles: {type: String, default: "user", enum: ["user", "admin", "critic"]}
     }, {collection: 'MongooseWebAppProject.user'});
