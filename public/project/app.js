@@ -1,3 +1,3 @@
 (function () {
-    angular.module("WebAppMaker", ["ngRoute",'ngMap']);
+    angular.module("WebAppMaker", ["ngRoute",'ngMap','ngRateIt']);
 })();
