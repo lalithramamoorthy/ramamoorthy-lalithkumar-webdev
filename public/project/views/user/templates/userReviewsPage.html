@@ -84,13 +84,13 @@
 
                                     <div ng-repeat="user in model.followedusers" class="row">
                                         <hr/>
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="col-xs-6 col-sm-6 col-md-4">
                                             <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
                                                  alt="" ng-show="!user.imgUrl">
                                             <img class=" profile-small-image-size img-rounded"
                                                  ng-show="user.imgUrl" ng-src="{{user.imgUrl}}">
                                         </div>
-                                        <h4 class="col-xs-6 col-sm-6 col-md-6">
+                                        <h4 class="col-xs-6 col-sm-6 col-md-8">
                                             <a href=""
                                                ng-click="model.navigateToUserPage(user.username)">
                                                 {{user.firstName}}
@@ -104,14 +104,14 @@
 
                                     <div ng-repeat="user in model.followingusers" class="row">
                                         <hr/>
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="col-xs-6 col-sm-6 col-md-4">
                                             <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
                                                  alt="" ng-show="!user.imgUrl">
                                             <img class=" profile-small-image-size img-rounded"
                                                  ng-show="user.imgUrl" ng-src="{{user.imgUrl}}">
 
                                         </div>
-                                        <h4 class="col-xs-6 col-sm-6 col-md-6">
+                                        <h4 class="col-xs-6 col-sm-6 col-md-8">
                                             <a href=""
                                                ng-click="model.navigateToUserPage(user.username)">
                                                 {{user.firstName}}
