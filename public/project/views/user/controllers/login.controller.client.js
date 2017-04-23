@@ -31,17 +31,5 @@
                         }
                     });
         }
-
-        //     function login(user) {
-        //     var promise = UserService
-        //         .findUserByCredentials(user.username, user.password)
-        //         .then(function (usr) {
-        //             if(usr) {
-        //                 $location.url("/profile/"+usr._id);
-        //             } else {
-        //                 vm.error = "User not found";
-        //             }
-        //         });
-        // };
     }
 })();

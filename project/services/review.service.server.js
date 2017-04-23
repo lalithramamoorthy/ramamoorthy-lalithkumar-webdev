@@ -75,8 +75,6 @@ module.exports = function (app, model) {
             );
     }
 
-    function jj() {
 
-    }
 
 }

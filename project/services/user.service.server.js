@@ -65,6 +65,8 @@ module.exports = function (app, model) {
             return res.redirect(redirectUrl);
         });
 
+
+
     function myGoogleStrategy(token, refreshToken, profile, done){
         userModel
             .findUserByGoogleId(profile.id)
