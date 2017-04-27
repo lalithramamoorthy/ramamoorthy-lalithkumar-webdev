@@ -16,16 +16,16 @@
                 .then(
                     function (response) {
                         var restaurants = response;
-                        if (restaurants.length != 0) {
+                        if (restaurants.data.restaurants.length != 0) {
                             vm.restaurants = restaurants.data.restaurants;
                             vm.error = null;
                         }
                         else {
-                            vm.error = "Change a few things up and try submitting again.";
+                            vm.error = "No restaurants found !! Try with a new Keyword";
                         }
                     },
                     function (err) {
-                        vm.error = "Change a few things up and try submitting again.";
+                        vm.error = "No restaurants found !! Try with a new Keyword";
                     });
         }
 
@@ -56,7 +56,7 @@
                 .then(
                     function (response) {
                         var restaurants = response;
-                        if (restaurants.length != 0) {
+                        if (restaurants.data.restaurants.length != 0) {
                             vm.restaurants = restaurants.data.restaurants;
                             $location.url("/user/search/restaurants/"+rest.name);
                             vm.error = null;

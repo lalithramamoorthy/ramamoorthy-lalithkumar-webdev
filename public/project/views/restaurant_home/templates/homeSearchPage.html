@@ -29,6 +29,9 @@
 
         <div class="row">
             <div class="col-sm-6 col-md-3" ng-repeat="restaurant in model.restaurants">
+                <div ng-show="model.error" class="alert alert-danger" role="alert">
+                    {{model.error}}
+                </div>
                 <div class="thumbnail">
                     <img ng-if="restaurant.image_url" class="my-image" src="{{restaurant.image_url}}" alt="">
                     <div class="caption">
